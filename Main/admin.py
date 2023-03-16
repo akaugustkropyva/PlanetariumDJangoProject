@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import Info, Proposal
 
-# Register your models here.
+admin.site.register(Proposal)
+admin.site.register(Info)
+

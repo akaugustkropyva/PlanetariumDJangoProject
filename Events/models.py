@@ -4,6 +4,9 @@ from django.db import models
 class Hall(models.Model):
     name = models.CharField(max_length=200)
 
+    def __str__(self):
+        return f"{self.name}"
+
 
 class Event(models.Model):
     name = models.CharField(max_length=200)
@@ -15,3 +18,6 @@ class Event(models.Model):
     about = models.TextField(max_length=2000)
     hall_id = models.ForeignKey(Hall, on_delete=models.CASCADE, related_name='events')
     popularity = models.PositiveSmallIntegerField()
+
+    def __str__(self):
+        return f"{self.name}"

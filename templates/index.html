@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="../images/logo/focus.png">
+    <link rel="icon" type="image/x-icon" href="/media/images/logo/focus.png">
     <link rel="stylesheet" href={% static "bootstrap-grid.min.css" %}>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,10 +15,10 @@
 </head>
 
 <body>
-<header class="header">
+<header class="header{% if not request.path == '/' %} header-other-pages{% endif %}">
     <hr class="first-line">
     <div class="container">
-        <a class="landing-href" href="">
+        <a class="landing-href" href="{% url 'main:landing' %}">
             <div class="logo logo-header">
                 <img src="/media/images/logo/focus.png" alt="">
                 <div class="name">
@@ -30,9 +30,9 @@
         </a>
         <div class="menu">
             <a class="menu-item" href="">Афіша</a>
-            <a class="menu-item" href="">Новини</a>
-            <a class="menu-item" href="">Про планетарій</a>
-            <a class="menu-item" href="">Контакти</a>
+            <a class="menu-item" href="{% url 'news:all_news' %}">Новини</a>
+            <a class="menu-item" href="{% url 'main:about_us' %}">Про планетарій</a>
+            <a class="menu-item" href="{% url 'main:contacts' %}">Контакти</a>
         </div>
 
         <div class="contacts">
@@ -51,8 +51,9 @@
     <hr>
 </header>
 
-    {% block content %}
-    {% endblock %}
+{% block content %}
+
+{% endblock %}
 
 
 
@@ -85,7 +86,7 @@
                 </div>
             </div>
             <div class="col-4 col-md-6">
-                <a class="landing-href" href="">
+                <a class="landing-href" href="{% url 'main:landing' %}">
                     <div class="logo logo-footer">
                         <img src="/media/images/logo/focus.png" alt="">
                         <div class="name ">

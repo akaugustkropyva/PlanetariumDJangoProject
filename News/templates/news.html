@@ -1,0 +1,44 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<section class="links">
+    <div class="container">
+        <a href="">На головну</a>
+        <p>&nbsp|&nbsp</p>
+        <a href="">Новини</a>
+    </div>
+</section>
+
+{% if news %}
+        <section class="additional-info-block news">
+            <div class="container">
+                {% for news in news %}
+                    <h1>
+                        {{ news.name }}
+                    </h1>
+                    <hr>
+                    <div class="block">
+                        <div class="spacing">
+                            <p>
+                                {{ news.about }}
+                            </p>
+                            <img src="{{ news.image.url }}" alt="">
+                        </div>
+                    </div>
+                    <div class="form">
+                        <button onclick=location.href="{{ news.link }}">Детальніше</button>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+{% else %}
+        <section class="additional-info-block news">
+            <div class="container">
+                <h1>
+                    Нема новин...
+                </h1>
+            </div>
+        </section>
+{% endif %}
+
+{% endblock %}

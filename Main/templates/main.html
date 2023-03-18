@@ -1,11 +1,15 @@
 {% extends 'index.html' %}
 
+{% block title %}
+    Планетарій Planetium
+{% endblock %}
+
 {% block content %}
 <section class="first-block">
         <div class="container">
             <h1>Новий Київський<br>планетарій “Planetium”</h1>
             <h2>Запрошує на неймовірну подорож загадковим космосом.<br>До зірок - один крок!</h2>
-            <a class="main-button" href="">Придбати квиток</a>
+            <a class="main-button" href="{% url 'events:all_events' %}">Придбати квиток</a>
         </div>
     </section>
 
@@ -118,7 +122,7 @@
                 {% endif %}
             </div>
             <div class="form">
-                <a class="all-events" href="">Всі івенти</a>
+                <a class="all-events" href="{% url 'events:all_events' %}">Всі івенти</a>
             </div>
         </div>
     </section>

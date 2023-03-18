@@ -1,0 +1,91 @@
+{% extends 'index.html' %}
+
+{% block title %}
+    {{ event.name }}
+{% endblock %}
+
+{% block content %}
+
+{% if event %}
+    <section class="links links-info-page">
+        <div class="container">
+            <a href="{% url 'main:landing' %}">На головну</a>
+            <p>&nbsp|&nbsp</p>
+            <a href="{% url 'events:all_events' %}">Афіша</a>
+            <p class="full-name">&nbsp|&nbsp</p>
+            <a class="full-name" href="">{{ event.name }}</a>
+            <p class="short-name">&nbsp|&nbsp</p>
+            <a class="short-name" href="">{{ event.short_name }}</a>
+        </div>
+    </section>
+
+    <section class="poster-main-info">
+        <div class="container">
+            <h1>
+                {{ event.name }}
+            </h1>
+            <hr>
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    <div class="block">
+                        <img src="{{ event.image.url }}" alt="">
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="full-poster-info">
+                        <div class="written-info">
+                            <img src="/media/images/poster/calendar.png" alt="">
+                            <p>Дата проведення:&nbsp <br> Від {{ event.from_date|date:"m-d" }} -
+                                До {{ event.to_date|date:"m-d" }}</p>
+                        </div>
+                        <div class="written-info">
+                            <img src="/media/images/poster/theater.png" alt="">
+                            {% if event.hall_id %}
+                                <p>{{ event.hall_id.name }}</p>
+                            {% else %}
+                                <p>Нема зали</p>
+                            {% endif %}
+                        </div>
+                        <div class="written-info">
+                            <img src="/media/images/poster/banknotes.png" alt="">
+                            <p>Ціна:</p>
+                            <p class="price">{{ event.price }} ГРН.</p>
+                        </div>
+                    </div>
+                    <div class="button">
+                        <button onclick="show('block')">Придбати квиток</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="additional-info-block additional-info-block-info-page">
+        <div class="container">
+            <h1>
+                Про подію
+            </h1>
+            <hr>
+            <div class="block">
+                <div class="spacing">
+                    <p>
+                        {{ event.about }}
+                    </p>
+                </div>
+            </div>
+            <div class="form">
+                <button onclick="show('block')">Придбати квиток</button>
+            </div>
+        </div>
+    </section>
+
+    <div onclick="show('none')" id="bg-form" class="bg-gray"></div>
+
+
+{% else %}
+        <h1>
+            На жаль, нема події...
+        </h1>
+{% endif %}
+
+{% endblock %}

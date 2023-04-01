@@ -16,8 +16,11 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from django.conf import settings
+from django.views.decorators.cache import cache_control
+from django.contrib.staticfiles.views import serve
 from django.conf.urls.static import static
+from . import settings
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,5 +31,6 @@ urlpatterns = [
     path('user/', include('User.urls')),
     path('', include('Account.urls')),
     path('', include('Order.urls'))
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
+              + static(settings.STATIC_URL, view=cache_control(no_cache=True, must_revalidate=True)(serve))
 

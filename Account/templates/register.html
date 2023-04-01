@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+
+{% block title %}
+    Зареєструватися
+{% endblock %}
+{% block content %}
+
+    <section class="links">
+        <div class="container">
+            <a href="{% url 'main:landing' %}">На головну</a>
+            <p>&nbsp|&nbsp</p>
+            <a>Зареєструватися</a>
+        </div>
+    </section>
+
+
+
+    <section class="posters-block">
+        <div class="container">
+            <form name="form" method="POST">
+                <label>
+                    <input type="text" placeholder="Ім'я" name="name" class="input">
+                </label>
+                <label>
+                    <input type="email" placeholder="Пошта" name="email" class="input">
+                </label>
+                <button type="submit"> Зареєструватися </button>
+                <a class="all-events" href="{% url 'account:login' %}"> Ввійти </a>
+            </form>
+        </div>
+    </section>
+{% endblock %}

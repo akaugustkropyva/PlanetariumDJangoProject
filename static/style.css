@@ -6,7 +6,6 @@ body {
   background-repeat: repeat;
   font-family: Podkova, serif;
 }
-
 h1 {
   display: flex;
   align-items: center;
@@ -86,6 +85,26 @@ hr {
   display: flex;
   justify-content: right;
   width: 300px;
+}
+.header .container .contacts img {
+  margin-top: 20px;
+  width: 50px;
+  height: 50px;
+}
+.header .container .contacts .login {
+  width: 150px;
+  display: flex;
+  font-size: 24px;
+  justify-content: center;
+  align-items: center;
+}
+.header .container .contacts .login a {
+  color: white;
+  font-size: 24px;
+  text-decoration: none;
+}
+.header .container .contacts .login a:hover {
+  text-decoration: underline;
 }
 .header .container .menu-mobile-version {
   display: none;
@@ -251,8 +270,7 @@ hr {
   height: 800px;
 }
 .partners .circle {
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .sales-block {
   background: transparent;
@@ -350,8 +368,7 @@ hr {
 .poster img {
   width: 100%;
   height: 400px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .poster .calendar {
   height: 100px;
@@ -420,8 +437,7 @@ hr {
 .poster-main-info .container .row .col-lg-6 .block img {
   height: 85%;
   width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .poster-main-info .container .row .col-lg-6 .full-poster-info {
   display: flex;
@@ -523,8 +539,7 @@ hr {
 .about-us-picture-block .row .col-12 .block img {
   height: 100%;
   width: 80%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .posters-block {
   background: transparent;
@@ -627,8 +642,7 @@ hr {
 }
 .additional-info-block .block .spacing img,
 .about-block .block .spacing img {
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   width: 300px;
   height: 100%;
 }
@@ -1067,8 +1081,7 @@ hr {
     height: 320px;
   }
   .hall-blocks .container .col-xl-4 .square img {
-    -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
   }
   .hall-blocks .container .col-xl-4 .square p {
     display: flex;
@@ -1224,7 +1237,6 @@ hr {
   .header .container .contacts {
     justify-content: center;
     width: -moz-fit-content;
-    /*width: -webkit-fit-content;*/
     width: fit-content;
   }
   .header .container .menu-icon {
@@ -2379,4 +2391,4 @@ hr {
     width: 130%;
   }
 }
-
+/*# sourceMappingURL=style.css.map */

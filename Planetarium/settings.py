@@ -35,11 +35,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
+    'crispy_bootstrap5',
     'Main.apps.MainConfig',
     'Events.apps.EventsConfig',
     'News.apps.NewsConfig',
     'Account.apps.AccountConfig',
+    'User.apps.UserConfig',
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     'Planetarium.middleware.DisableCacheMiddleware',

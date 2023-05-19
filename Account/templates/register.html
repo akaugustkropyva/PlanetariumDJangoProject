@@ -1,4 +1,6 @@
 {% extends 'index.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
 
 {% block title %}
     Зареєструватися
@@ -13,20 +15,37 @@
         </div>
     </section>
 
-
-
-    <section class="posters-block">
+    <section class="posters-block posters-block-register">
         <div class="container">
-            <form name="form" method="POST">
-                <label>
-                    <input type="text" placeholder="Ім'я" name="name" class="input">
-                </label>
-                <label>
-                    <input type="email" placeholder="Пошта" name="email" class="input">
-                </label>
-                <button type="submit"> Зареєструватися </button>
-                <a class="all-events" href="{% url 'account:login' %}"> Ввійти </a>
-            </form>
+            <div class="sub-container">
+                <div class="registration">
+                    <form name="form" method="POST">
+                        <h2>| Введіть дані |</h2>
+                        {{ form.errors }}
+                        {% csrf_token %}
+                            {{ form.username }}
+                            {{ form.email }}
+                            {{ form.password1 }}
+                            {{ form.password2 }}
+                        <button type="submit"> Зареєструватися </button>
+                        <a class="additional-buttom" href="{% url 'account:login' %}"> Вже маю акаунт </a>
+                    </form>
+                </div>
+            </div>
+
         </div>
     </section>
+
+    <script>
+		var form_fields = document.getElementsByTagName('input')
+		form_fields[1].placeholder="Ім'я";
+		form_fields[2].placeholder='Пошта';
+		form_fields[3].placeholder='Пароль';
+		form_fields[4].placeholder='Підтвердження паролю';
+
+		for (var field in form_fields){
+			form_fields[field].className += ' input'
+		}
+    </script>
+
 {% endblock %}

@@ -27,4 +27,11 @@ def log_in(request):
         if user is not None:
             login(request, user)
             return redirect("user:profile")
+        else:
+            messages.info(request, "Ім'я або пароль неправильні!")
     return render(request, "login.html", {"form": form})
+
+
+def log_out(request):
+    logout(request)
+    return redirect("account:login")

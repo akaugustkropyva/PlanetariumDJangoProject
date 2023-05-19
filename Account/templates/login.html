@@ -7,11 +7,20 @@
 {% endblock %}
 {% block content %}
 
+
     <section class="links">
         <div class="container">
             <a href="{% url 'main:landing' %}">На головну</a>
             <p>&nbsp|&nbsp</p>
             <a href="">Ввійти</a>
+        </div>
+    </section>
+
+    <section class="links">
+        <div class="container">
+            {% for message in messages %}
+                <p> {{ message }}</p>
+            {% endfor %}
         </div>
     </section>
 

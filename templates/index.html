@@ -43,8 +43,13 @@
 
         <div class="contacts">
             <div class="login">
-                <a href="{% url 'account:login' %}">Профіль</a>
+                <a href="{% url 'account:logout' %}">Вийти</a>
             </div>
+
+            <div class="login">
+                <a href="{% url 'account:login' %}">{{ request.user }}</a>
+            </div>
+
             <img class="profile-pic" src="/media/images/logo/user.png" alt="">
         </div>
 

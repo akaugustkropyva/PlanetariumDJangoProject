@@ -1,0 +1,64 @@
+{% extends 'index.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Профіль
+{% endblock %}
+{% block content %}
+
+
+    <section class="poster-main-info">
+        <div class="container">
+            {% for message in messages %}
+                <h1> {{ message }}</h1>
+            {% endfor %}
+
+            <h1>
+                Ім'я
+            </h1>
+            <hr>
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    <div class="block">
+                        <img src="/media/images/events/spacesuit.jpg" alt="">
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="full-poster-info">
+                        <div class="written-info">
+                            <p>Логін:<br> Від 04.12 -
+                                До 10.12</p>
+                        </div>
+                        <div class="written-info">
+                            <p>Пошта:<br> Від 04.12 -
+                                До 10.12</p>
+                        </div>
+                    </div>
+                    <div class="button">
+                        <button onclick="show('block')">Редагувати дані</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="additional-info-block additional-info-block-info-page profile-length">
+        <div class="container">
+            <div class="user-div">
+                <div class="user-button">
+                    <button onclick="show('block')">Історія замовлень</button>
+                </div>
+                <div class="user-button">
+                    <button onclick="show('block')">Список бажаного</button>
+                </div>
+            </div>
+            <div class="form">
+                <button onclick="show('block')">Вийти</button>
+            </div>
+        </div>
+    </section>
+
+    <div onclick="show('none')" id="bg-form" class="bg-gray"></div>
+
+{% endblock %}

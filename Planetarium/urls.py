@@ -30,7 +30,7 @@ urlpatterns = [
     path('news/', include('News.urls')),
     path('user/', include('User.urls')),
     path('', include('Account.urls')),
-    path('', include('Order.urls'))
+    path('', include('Order.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
               + static(settings.STATIC_URL, view=cache_control(no_cache=True, must_revalidate=True)(serve))
 

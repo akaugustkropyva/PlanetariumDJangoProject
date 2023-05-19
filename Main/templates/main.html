@@ -99,7 +99,7 @@
                     {% for event in events %}
                         <div class="col-6 col-xl-3">
                             <div class="poster">
-                                <p class="name">{{ event.name }}</p>
+                                <a class="name" href="{% url 'events:event' event.id %}">{{ event.name }}</a>
                                  <img src="{{ event.image.url }}" alt="">
                                 <div class="calendar">
                                     <img src="/media/images/poster/calendar.png" alt="">
@@ -110,7 +110,7 @@
                                 </div>
                                 <hr class="poster-hr">
                                 <p class="price">{{ event.price }} ГРН.</p>
-                                <a href="">Придбати квиток</a>
+                                <a href="">Додати у кошик</a>
                             </div>
                         </div>
                     {% endfor %}

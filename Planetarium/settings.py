@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'News.apps.NewsConfig',
     'Account.apps.AccountConfig',
     'User.apps.UserConfig',
+    'Order.apps.OrderConfig',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"

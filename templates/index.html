@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="{% static "/style.css" %}?v=1"  />
 {#    <link rel="stylesheet" type="text/css" href="{% static "/style.css" %}?"  />#}
     <script src={% static "js/formstate.js" %}></script>
+    <script src={% static "js/card.js" %}></script>
 
     <title>
     {% block title %}
@@ -55,7 +56,10 @@
                 </div>
             {% endif %}
 
-            <img class="profile-pic" src="/media/images/logo/user.png" alt="">
+            <a href="{% url 'order:cart' %}">
+                <img class="profile-pic" src="/media/images/logo/cart.png" alt="">
+            </a>
+
         </div>
 
         <div class="menu-icon">

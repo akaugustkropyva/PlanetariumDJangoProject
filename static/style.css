@@ -1019,6 +1019,7 @@ hr {
 .footer .last-line {
   margin-bottom: 50px;
 }
+
 @media (max-width: 1399.5px) {
   .header .container .menu {
     width: 650px;

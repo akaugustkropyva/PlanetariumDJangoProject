@@ -1,0 +1,73 @@
+{% extends 'index.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Профіль
+{% endblock %}
+{% block content %}
+
+
+    <section class="poster-main-info">
+        <div class="container">
+            {% for message in messages %}
+                <h1> {{ message }}</h1>
+            {% endfor %}
+
+            <h1>
+                <a href="{% url 'user:profile' %}">{{ request.user.customer.name }}</a>
+            </h1>
+            <hr>
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    <div class="block">
+                        <img src="{{ request.user.customer.profile_pic.url }}" alt="">
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <section class="posters-block posters-block-register">
+                        <div class="container">
+                            <div class="sub-container">
+                                <div class="registration">
+                                    <form name="form" method="POST" enctype="multipart/form-data">
+                                        <h2>| Введіть дані |</h2>
+
+                                        {% csrf_token %}
+
+                                        {% for field_errors in form.errors.values %}
+                                            {% for error in field_errors %}
+                                                <li>{{ error }}</li>
+                                            {% endfor %}
+                                        {% endfor %}
+
+                                        <label for="id_name">Ім'я:</label>
+                                        <input type="text" id="id_name" name="name" value="{{ form.name.value }}" class="input">
+
+                                        <label for="id_phone">Телефон:</label>
+                                        <input type="text" id="id_phone" name="phone" value="{{ form.phone.value }}" class="input">
+
+
+                                        <label for="id_email">Пошта:</label>
+                                        <input type="email" id="id_email" name="email" value="{{ form.email.value }}" class="input">
+
+                                        <label for="id_profile_pic">Фото профілю:</label>
+                                        <input type="file" id="id_profile_pic" name="profile_pic" class="input">
+
+
+                                        <label for="id_delete_photo">Видалити фото профілю</label>
+                                        <input type="checkbox" name="delete_photo" id="id_delete_photo">
+
+                                        <button type="submit"> Змінити </button>
+                                        <a class="additional-buttom" href="{% url 'user:profile' %}"> Повернутися </a>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

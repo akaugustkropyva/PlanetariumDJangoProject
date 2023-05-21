@@ -15,28 +15,27 @@
             {% endfor %}
 
             <h1>
-                Ім'я
+                <a href="{% url 'user:profile' %}">{{ request.user.customer.name }}</a>
             </h1>
             <hr>
             <div class="row">
                 <div class="col-12 col-lg-6">
                     <div class="block">
-                        <img src="/media/images/events/spacesuit.jpg" alt="">
+{#                        <img src="/media/images/events/spacesuit.jpg" alt="">#}
+                        <img src="{{ request.user.customer.profile_pic.url }}" alt="">
                     </div>
                 </div>
                 <div class="col-12 col-lg-6">
                     <div class="full-poster-info">
                         <div class="written-info">
-                            <p>Логін:<br> Від 04.12 -
-                                До 10.12</p>
+                            <p>Телефон:<br> {{ request.user.customer.phone }}</p>
                         </div>
                         <div class="written-info">
-                            <p>Пошта:<br> Від 04.12 -
-                                До 10.12</p>
+                            <p>Пошта:<br> {{ request.user.customer.email }}</p>
                         </div>
                     </div>
                     <div class="button">
-                        <button onclick="show('block')">Редагувати дані</button>
+                        <a href="{% url 'user:profile_change' %}">Редагувати дані</a>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from User.models import Customer
 from .forms import RegisterForm, LoginForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
@@ -11,6 +12,7 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
+            Customer.objects.create(user=user, name=form.cleaned_data.get("username"), email=form.cleaned_data.get("email"))
             login(request, user)
             username = form.cleaned_data.get("username")
             messages.success(request, "Вітаю " + username + "! Акаунт було успішно створено")

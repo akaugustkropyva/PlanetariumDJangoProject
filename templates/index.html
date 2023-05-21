@@ -42,13 +42,18 @@
         </div>
 
         <div class="contacts">
-            <div class="login">
-                <a href="{% url 'account:logout' %}">Вийти</a>
-            </div>
-
-            <div class="login">
-                <a href="{% url 'account:login' %}">{{ request.user }}</a>
-            </div>
+            {% if user.is_authenticated %}
+                <div class="login">
+                    <a href="{% url 'account:logout' %}">Вийти</a>
+                </div>
+                <div class="login">
+                    <a href="{% url 'user:profile' %}">{{ request.user }}</a>
+                </div>
+            {% else %}
+                <div class="login">
+                    <a href="{% url 'account:login' %}">Увійти</a>
+                </div>
+            {% endif %}
 
             <img class="profile-pic" src="/media/images/logo/user.png" alt="">
         </div>

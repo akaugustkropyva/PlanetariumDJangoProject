@@ -1,0 +1,99 @@
+{% extends 'index.html' %}
+
+{% block title %}
+    {{ event.name }}
+{% endblock %}
+
+{% block content %}
+
+{#{% if event %}#}
+    <section class="links links-info-page">
+        <div class="container">
+            <a href="{% url 'main:landing' %}">На головну</a>
+            <p>&nbsp|&nbsp</p>
+            <a href="{% url 'events:all_events' %}">Афіша</a>
+        </div>
+    </section>
+
+    <section class="additional-info-block cart">
+        <div class="container">
+            <h1>
+                Кошик
+            </h1>
+            <hr>
+            <div class="block params-block">
+                <div class="products-params">
+                        <div class="item-param">
+                            Кількість <strong>1</strong>
+                        </div>
+                        <div class="item-param">
+                            Всього: <strong>40 грн.</strong>
+                        </div>
+                        <div class="item-param">
+                            <a class="clear-cart" href="#">Очистити</a>
+                        </div>
+                        <div class="item-param link">
+                            <a class="submit-order" href="#">Оплатити замовлення</a>
+                        </div>
+                    </div>
+            </div>
+            <div class="block">
+                <div class="spacing">
+                    <div class="products-params">
+                        <div class="item-param delete-item">
+                        </div>
+                        <div class="item-param">
+                        </div>
+                        <div class="item-param item-param-name">
+                                Назва
+                        </div>
+                        <div class="item-param item-value-price">
+                                Ціна
+                        </div>
+                        <div class="item-param">
+                                Кількість
+                        </div>
+                        <div class="item-param item-value-price">
+                                Сумарно
+                        </div>
+                    </div>
+                    <hr>
+                        <div class="products-params products-values">
+                            <div class="item-param delete-item">
+                                <a href="#">
+                                    <img src="/media/images/logo/close.png" alt="">
+                                </a>
+                            </div>
+                            <div class="item-param">
+                                <img src="" alt="">
+                            </div>
+                            <div class="item-param item-param-name">
+                                    Штани {{ i }}
+                            </div>
+                            <div class="item-param item-value-price">
+                                    40 грн.
+                            </div>
+                            <div class="item-param">
+                                    1
+                            </div>
+                            <div class="item-param item-value-price">
+                                    40 грн.
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+{#{% else %}#}
+    <div class="container">
+        <h1>
+            Ваш кошик пустий...
+        </h1>
+    </div>
+
+{#{% endif %}#}
+
+{% endblock %}

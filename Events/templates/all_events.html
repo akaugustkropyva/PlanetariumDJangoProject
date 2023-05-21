@@ -10,9 +10,51 @@
     <div class="container">
         <a href="{% url 'main:landing' %}">На головну</a>
         <p>&nbsp|&nbsp</p>
-        <a href="">Афіша</a>
+        <a href="{% url 'events:all_events' %}">Афіша</a>
     </div>
 </section>
+
+
+<section class="choice-maker">
+        <div class="container">
+            <h1>
+                Афіша подій
+            </h1>
+            <hr>
+            <form action="" method="get">
+                <div class="row">
+                    <div class="col-4 col-lg-3">
+                            <form  method="GET" action="/all_events/">
+                                <input class="search-input" type="search" placeholder="Пошук" aria-label="Пошук"
+                                       name="search">
+                            </form>
+                    </div>
+                    <div class="col-8 col-lg-3">
+                            <form  method="GET" action="/all_events/">
+                                <input class="search-input" id="datepicker" type="search" placeholder="Дата" aria-label="Дата"
+                                       name="date">
+                            </form>
+                    </div>
+                    <div class="col-12 col-lg-3">
+                        <label>
+                            <select name="sorting" id="sort-list" onchange="location = sort_events()" class="choicebox order">
+                                    <option value="" id="placeholder" disabled selected hidden>Сортування</option>
+                                    <option value="name" id="name">Від А до Я</option>
+                                    <option value="-name" id="-name">Від Я до А</option>
+                                    <option value="price" id="price">Найдешевші</option>
+                                    <option value="-price" id="-price">Найдорожчі</option>
+                                    <option value="-popularity" id="-popularity">Найпопулярніші</option>
+                                    <option value="popularity" id="popularity">Найнепопулярніші</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="form">
+                        <button type="submit" class="search">Пошук</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
 
 <section class="posters-block posters-block-container">
     <div class="container">
@@ -37,7 +79,6 @@
                     </div>
                 {% endfor %}
                 <div class="form">
-{#                    #}
                 </div>
             {% else %}
                 <h1>
@@ -48,4 +89,48 @@
     </div>
 </section>
 
+<script>
+    $(function () {
+      $("#datepicker").datepicker({
+          format:'yyyy-mm-dd'
+      });
+    });
+
+    {#function get(name) {#}
+    {#    if (name === (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(location.search))#}
+    {#        return decodeURIComponent(name[1]);#}
+    {##}
+    {##}
+    {#if(get('sorting'))#}
+    {#    document.getElementById('placeholder').innerHTML = document.getElementById(get('sorting')).innerHTML;#}
+
+
+</script>
+
 {% endblock %}
+
+{#{% block js %}#}
+{#<script>#}
+{#    $(function () {#}
+{#      $("#datepicker").datepicker();#}
+{#    });#}
+    {#function get(name) {#}
+    {#    if (name === (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(location.search))#}
+    {#      return decodeURIComponent(name[1]);#}
+    {##}
+    {##}
+    {#if(get('sorting'))#}
+    {#        document.getElementById('placeholder').innerHTML = document.getElementById(get('sorting')).innerHTML;#}
+
+
+    {#function sort_events() {#}
+    {#    var url = new URL(window.location.href);#}
+    {#    var search_params = url.searchParams;#}
+    {#    search_params.set('sorting', document.getElementById("sort-list").value);#}
+    {#    url.search = search_params.toString();#}
+    {#    var new_url = url.toString();#}
+    {#    console.log(new_url);#}
+    {#    return new_url#}
+    {##}
+
+{#{% endblock %}#}

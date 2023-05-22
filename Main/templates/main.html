@@ -110,7 +110,7 @@
                                 </div>
                                 <hr class="poster-hr">
                                 <p class="price">{{ event.price }} ГРН.</p>
-                                <a href="">Додати у кошик</a>
+                                <button data-event="{{ event.id }}" data-action="add" class="update-cart">Додати у кошик</button>
                             </div>
                         </div>
                     {% endfor %}

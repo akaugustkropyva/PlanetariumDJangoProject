@@ -6,7 +6,7 @@
 
 {% block content %}
 
-{#{% if event %}#}
+{% if items %}
     <section class="links links-info-page">
         <div class="container">
             <a href="{% url 'main:landing' %}">На головну</a>
@@ -24,10 +24,10 @@
             <div class="block params-block">
                 <div class="products-params">
                         <div class="item-param">
-                            Кількість <strong>1</strong>
+                            Кількість <strong>{{ order.get_cart_items }}</strong>
                         </div>
                         <div class="item-param">
-                            Всього: <strong>40 грн.</strong>
+                            Всього: <strong>{{ order.get_cart_total }} грн.</strong>
                         </div>
                         <div class="item-param">
                             <a class="clear-cart" href="#">Очистити</a>
@@ -58,6 +58,7 @@
                         </div>
                     </div>
                     <hr>
+                        {% for item in items %}
                         <div class="products-params products-values">
                             <div class="item-param delete-item">
                                 <a href="#">
@@ -65,21 +66,22 @@
                                 </a>
                             </div>
                             <div class="item-param">
-                                <img src="" alt="">
+                                <img src="{{ item.event.image.url }}" alt="">
                             </div>
                             <div class="item-param item-param-name">
-                                    Штани {{ i }}
+                                    {{ item.event.name }}
                             </div>
                             <div class="item-param item-value-price">
-                                    40 грн.
+                                    {{ item.event.price }} грн.
                             </div>
                             <div class="item-param">
-                                    1
+                                    {{ item.quantity }}
                             </div>
                             <div class="item-param item-value-price">
-                                    40 грн.
+                                    {{ item.get_total }} грн.
                             </div>
                         </div>
+                        {% endfor %}
                 </div>
             </div>
 
@@ -87,13 +89,13 @@
     </section>
 
 
-{#{% else %}#}
+{% else %}
     <div class="container">
         <h1>
             Ваш кошик пустий...
         </h1>
     </div>
 
-{#{% endif %}#}
+{% endif %}
 
 {% endblock %}

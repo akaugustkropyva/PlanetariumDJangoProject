@@ -25,6 +25,7 @@ class Order(models.Model):
         total = sum([item.quantity for item in order_items])
         return total
 
+
 class OrderItem(models.Model):
     event = models.ForeignKey(Event, on_delete=models.SET_NULL, blank=True, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)

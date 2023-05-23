@@ -11,11 +11,9 @@ def cart(request):
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
     else:
         items = []
         order = {'get_cart_total': 0, 'det_cart_total': 0}
-        cartItems = order['get_cart_total']
     return render(request, "cart.html", {'items': items, 'order': order})
 
 
@@ -24,26 +22,29 @@ def updateItem(request):
     eventId = data['eventId']
     action = data['action']
 
-    print('Action:', action)
-    print('eventId:', eventId)
-
     customer = request.user.customer
-    event = Event.objects.get(id=eventId)
     order, created = Order.objects.get_or_create(customer=customer, complete=False)
 
-    orderItem, created = OrderItem.objects.get_or_create(order=order, event=event)
+    if eventId:
+        event = Event.objects.get(id=eventId)
+        orderItem, created = OrderItem.objects.get_or_create(order=order, event=event)
 
-    if action == 'add':
-        orderItem.quantity = (orderItem.quantity + 1)
-    elif action == 'remove':
-        orderItem.quantity = (orderItem.quantity - 1)
+        if action == 'add':
+            orderItem.quantity = (orderItem.quantity + 1)
+        elif action == 'remove':
+            orderItem.quantity = (orderItem.quantity - 1)
+        elif action == 'delete-item':
+            orderItem.quantity = 0
 
-    orderItem.save()
+        orderItem.save()
 
-    if orderItem.quantity <= 0:
-        orderItem.delete()
+        if orderItem.quantity <= 0:
+            orderItem.delete()
 
-    return JsonResponse('Item was added', safe=False)
+    if action == 'delete-all':
+        order.delete()
+
+    return JsonResponse('Cart was changed', safe=False)
 
 
 def submit(request):

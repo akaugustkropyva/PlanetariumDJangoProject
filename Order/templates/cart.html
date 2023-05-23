@@ -1,4 +1,5 @@
 {% extends 'index.html' %}
+{% load static %}
 
 {% block title %}
     {{ event.name }}
@@ -32,7 +33,10 @@
                             Всього: <strong>{{ order.get_cart_total }} грн.</strong>
                         </div>
                         <div class="item-param">
-                            <a class="clear-cart" href="#">Очистити</a>
+                            <button data-event="" data-action="delete-all" class="update-cart clear-cart">
+                                    Очистити
+                            </button>
+{#                            <a class="clear-cart" href="#">Очистити</a>#}
                         </div>
                         <div class="item-param link">
                             <a class="submit-order" href="#">Оплатити замовлення</a>
@@ -63,9 +67,9 @@
                         {% for item in items %}
                         <div class="products-params products-values">
                             <div class="item-param delete-item">
-                                <a href="#">
+                                <button data-event="{{ item.event.id }}" data-action="delete-item" class="update-cart">
                                     <img src="/media/images/logo/close.png" alt="">
-                                </a>
+                                </button>
                             </div>
                             <div class="item-param">
                                 <img src="{{ item.event.image.url }}" alt="">
@@ -78,7 +82,15 @@
                             </div>
                             <div class="item-param">
                                     {{ item.quantity }}
+                                <button data-event="{{ item.event.id }}" data-action="add" class="update-cart">+</button>
+                                <button data-event="{{ item.event.id }}" data-action="remove" class="update-cart">-</button>
+{#                                <button data-event="{{ event.id }}" data-action="add" class="update-cart">#}
+{#                                    <img src="/media/images/filter/up-arrow.png" alt="">#}
+{#                                </button>#}
+{#                                <img id="myImage" data-event="{{ item.event.id }}" data-actions="add" class="update-cart" src="/media/images/filter/up-arrow.png">#}
+{#                                <img data-event="{{ item.event.id }}" data-actions="remove" class="update-cart" src="/media/images/filter/down-arrow.png" alt="">#}
                             </div>
+
                             <div class="item-param item-value-price">
                                     {{ item.get_total }} грн.
                             </div>

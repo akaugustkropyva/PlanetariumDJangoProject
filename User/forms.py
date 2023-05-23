@@ -34,6 +34,14 @@ class CustomerForm(forms.ModelForm):
             raise forms.ValidationError("Це ім'я вже використовується!")
         return name
 
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if email and User.objects.filter(email=email).exists():
+            if self.instance and self.instance.user.username == email:
+                return email
+            raise forms.ValidationError('Ця пошта вже використовується')
+        return email
+
     def clean_phone(self):
         phone = self.cleaned_data.get('phone')
         if phone:

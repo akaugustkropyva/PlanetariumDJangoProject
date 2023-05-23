@@ -1,0 +1,45 @@
+{% extends 'index.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Оплата
+{% endblock %}
+{% block content %}
+
+    <section class="links">
+        <div class="container">
+            <a href="{% url 'main:landing' %}">На головну</a>
+            <p>&nbsp|&nbsp</p>
+            <a href="{% url 'events:all_events' %}">Афіша</a>
+            <p>&nbsp|&nbsp</p>
+            <a href="{% url 'order:cart' %}">Кошик</a>
+            <p>&nbsp|&nbsp</p>
+            <a href="{% url 'order:submit' %}">Оплата</a>
+        </div>
+    </section>
+
+    <section class="posters-block posters-block-register">
+        <div class="container">
+            <div class="sub-container">
+                <div class="registration submit-form">
+                    <form name="form" method="POST">
+                        <h2>| Введіть дані |</h2>
+                        <input type="text" class="input submit-input" placeholder="Ім'я">
+                        <input type="email" class="input submit-input" placeholder="Пошта">
+                        <input type="tel" class="input submit-input" placeholder="Телефон (не обов'язково)">
+                        <input type="text" class="input submit-input" placeholder="Номер картки">
+                        <div class="card-info">
+                            <input type="date" class="input submit-input part-input-date" placeholder="Дата">
+                            <input type="number" class="input submit-input part-input-code" placeholder="Код">
+                        </div>
+                        <button type="submit">Оплатити</button>
+                        <a class="additional-buttom" href="{% url 'order:cart' %}"> Вернутися у кошик </a>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}

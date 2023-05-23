@@ -15,13 +15,12 @@
             {% endfor %}
 
             <h1>
-                <a href="{% url 'user:profile' %}">{{ request.user.customer.name }}</a>
+                <a class="user-name" href="{% url 'user:profile' %}">{{ request.user.customer.name }}</a>
             </h1>
             <hr>
             <div class="row">
                 <div class="col-12 col-lg-6">
                     <div class="block">
-{#                        <img src="/media/images/events/spacesuit.jpg" alt="">#}
                         <img src="{{ request.user.customer.profile_pic.url }}" alt="">
                     </div>
                 </div>
@@ -35,7 +34,7 @@
                         </div>
                     </div>
                     <div class="button">
-                        <a href="{% url 'user:profile_change' %}">Редагувати дані</a>
+                        <a class="logout-button" href="{% url 'user:profile_change' %}">Редагувати дані</a>
                     </div>
                 </div>
             </div>
@@ -53,7 +52,7 @@
                 </div>
             </div>
             <div class="form">
-                <button onclick="show('block')">Вийти</button>
+                <a class="logout-button" href="{% url 'account:logout' %}">Вийти</a>
             </div>
         </div>
     </section>

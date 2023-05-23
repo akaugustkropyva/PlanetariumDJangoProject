@@ -17,11 +17,15 @@
 
     <section class="posters-block posters-block-register">
         <div class="container">
+            {% for field_errors in form.errors.values %}
+                {% for error in field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
             <div class="sub-container">
                 <div class="registration">
                     <form name="form" method="POST">
                         <h2>| Введіть дані |</h2>
-                        {{ form.errors }}
                         {% csrf_token %}
                             {{ form.username }}
                             {{ form.email }}

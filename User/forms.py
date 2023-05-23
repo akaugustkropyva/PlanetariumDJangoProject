@@ -37,7 +37,7 @@ class CustomerForm(forms.ModelForm):
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if email and User.objects.filter(email=email).exists():
-            if self.instance and self.instance.user.username == email:
+            if self.instance and self.instance.user.email == email:
                 return email
             raise forms.ValidationError('Ця пошта вже використовується')
         return email

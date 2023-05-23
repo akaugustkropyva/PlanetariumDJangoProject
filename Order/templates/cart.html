@@ -36,7 +36,6 @@
                             <button data-event="" data-action="delete-all" class="update-cart clear-cart">
                                     Очистити
                             </button>
-{#                            <a class="clear-cart" href="#">Очистити</a>#}
                         </div>
                         <div class="item-param link">
                             <a class="submit-order" href="#">Оплатити замовлення</a>
@@ -82,13 +81,10 @@
                             </div>
                             <div class="item-param">
                                     {{ item.quantity }}
-                                <button data-event="{{ item.event.id }}" data-action="add" class="update-cart">+</button>
-                                <button data-event="{{ item.event.id }}" data-action="remove" class="update-cart">-</button>
-{#                                <button data-event="{{ event.id }}" data-action="add" class="update-cart">#}
-{#                                    <img src="/media/images/filter/up-arrow.png" alt="">#}
-{#                                </button>#}
-{#                                <img id="myImage" data-event="{{ item.event.id }}" data-actions="add" class="update-cart" src="/media/images/filter/up-arrow.png">#}
-{#                                <img data-event="{{ item.event.id }}" data-actions="remove" class="update-cart" src="/media/images/filter/down-arrow.png" alt="">#}
+                                <div class="operation-block">
+                                    <button data-event="{{ item.event.id }}" data-action="add" class="update-cart operations">+</button>
+                                    <button data-event="{{ item.event.id }}" data-action="remove" class="update-cart operations">-</button>
+                                </div>
                             </div>
 
                             <div class="item-param item-value-price">

@@ -430,10 +430,36 @@ hr {
 .poster-main-info {
   height: 1000px;
 }
+
+.edit-profile-page {
+  height: 1400px;
+}
+
+.edit-profile-page li{
+  font-size: 28px;
+  color: white;
+}
+
+.edit-profile-page .delete-photo {
+  height: 30px;
+  width: 30px;
+  margin-top: 10px;
+}
+
 .poster-main-info .container h1 {
   height: 120px;
   margin-top: 50px;
 }
+
+.poster-main-info .container h1 .user-name {
+  color: white;
+  text-decoration: none;
+}
+
+.poster-main-info .container h1 .user-name:hover {
+  text-decoration: underline;
+}
+
 .poster-main-info .container .row {
   margin-top: 100px;
 }
@@ -587,6 +613,10 @@ hr {
   background: #311847;
   border-radius: 15px;
 }
+.posters-block .sub-container .edit-profile-form {
+  height: 900px;
+}
+
 
 .posters-block .sub-container .submit-form {
   height: 650px;
@@ -627,7 +657,6 @@ hr {
   border-radius: 5px;
 }
 
-
 .posters-block .sub-container .registration form button {
   display: flex;
   justify-content: center;
@@ -664,9 +693,23 @@ hr {
 .posters-block .sub-container .registration-login {
   height: 450px;
 }
-.posters-block-register {
-  height: 750px;
+
+.posters-block .sub-container .edit-profile-form form .edit-parameter {
+  font-size: 22px;
+  margin-top: 30px;
 }
+
+
+.posters-block-register {
+  height: 950px;
+}
+
+.posters-block-register li {
+  color: white;
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
 .posters-block-login {
   height: 600px;
 }
@@ -815,6 +858,11 @@ hr {
   margin-bottom: 10px;
 }
 
+.cart .block .spacing .products-values .update-cart {
+  height: 50px;
+  width: 50px;
+}
+
 .cart .block .spacing .products-params .item-param {
   display: flex;
   align-items: center;
@@ -825,7 +873,26 @@ hr {
   color: white;
 }
 
+.cart .block .spacing .products-params .item-param .update-cart {
+  background-color: transparent;
+  border: white solid 2px;
+  margin: 0;
+}
+.cart .block .spacing .products-params .item-param .operation-block {
+  margin-left: 5px;
+  display: inline-block;
+}
+.cart .block .spacing .products-params .item-param .operations {
+  width: 25px;
+  height: 25px;
+  color: white;
+}
+
 .cart .block .spacing .products-params .delete-item {
+  display: flex;
+  align-items: center;
+  bottom: 50px;
+  height: 50px;
   width: 50px;
 }
 
@@ -843,11 +910,14 @@ hr {
 }
 
 .cart .params-block .products-params .clear-cart {
+  height: 70px;
+  width: 360px;
   color: white;
+  background-color: transparent;
   text-decoration: none;
   border: 2px solid white;
   border-radius: 50px;
-  padding: 20px;
+  margin: 0;
 }
 
 .cart .params-block .products-params .clear-cart:hover {
@@ -922,6 +992,27 @@ hr {
   text-decoration: underline;
   transition: 0.3s all;
 }
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFD561;
+  font-size: 30px;
+  color: black;
+  height: 70px;
+  width: 360px;
+  border-radius: 50px;
+  text-decoration: none;
+  margin-top: 50px;
+}
+
+.logout-button:hover {
+  border-bottom: 10px solid rgba(158, 123, 155, 0.75);
+  text-decoration: underline;
+  transition: 0.3s all;
+}
+
 .info-about-us {
   height: 700px;
 }

@@ -408,10 +408,12 @@ hr {
   margin: 0;
   font-size: 30px;
 }
-.poster a {
+.poster button {
   background-color: #FFD561;
   color: #311847;
+  font-family: Podkova, serif;
   text-decoration: none;
+  border: none;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -420,7 +422,7 @@ hr {
   width: 250px;
   height: 60px;
 }
-.poster a:hover {
+.poster button:hover {
   border-bottom: 10px solid rgba(158, 123, 155, 0.75);
   text-decoration: underline;
   transition: 0.3s all;
@@ -585,12 +587,34 @@ hr {
   background: #311847;
   border-radius: 15px;
 }
+
+.posters-block .sub-container .submit-form {
+  height: 650px;
+}
+
 .posters-block .sub-container .registration form {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 0;
 }
+
+.posters-block .sub-container .registration form .card-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 60%;
+  margin-top: 0;
+}
+
+.posters-block .sub-container .registration form .card-info .part-input-date {
+  width: 200px;
+}
+
+.posters-block .sub-container .registration form .card-info .part-input-code {
+  width: 100px;
+}
+
 .posters-block .sub-container .registration form h2 {
   font-size: 40px;
 }
@@ -602,6 +626,8 @@ hr {
   margin-top: 15px;
   border-radius: 5px;
 }
+
+
 .posters-block .sub-container .registration form button {
   display: flex;
   justify-content: center;
@@ -777,7 +803,6 @@ hr {
   align-items: center;
   width: 100%;
   height: 100px;
-  background-color: #9E7B9B;
   border-radius: 10px;
 }
 
@@ -786,6 +811,7 @@ hr {
 }
 
 .cart .block .spacing .products-values {
+  background-color: #9E7B9B;
   margin-bottom: 10px;
 }
 
@@ -1038,6 +1064,18 @@ hr {
   width: 200px;
   color: white;
 }
+
+.choice-maker .container .row .col-lg-3 .search-input {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  width: 100%;
+  font-size: 32px;
+  font-family: Podkova, serif;
+  text-align: center;
+  border-radius: 15px;
+}
+
 .choice-maker .container .row .col-lg-3 .filter-caption img {
   height: 50px;
   width: 50px;

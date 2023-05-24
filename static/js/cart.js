@@ -1,15 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
     updateButton = document.getElementsByClassName('update-cart');
 
-    for(var i = 0; i < updateButton.length; i ++) {
+    for(let i = 0; i < updateButton.length; i ++) {
         updateButton[i].addEventListener('click', function(){
-            var eventId = this.dataset.event
-            var action = this.dataset.action
+            let eventId = this.dataset.event;
+            let action = this.dataset.action;
             console.log('eventId:', eventId, 'action:', action)
 
             console.log('USER:', user)
             if(user === 'AnonymousUser'){
-                console.log('Not logged in')
+                addCookieItem(eventId, action)
             } else {
                 updateUserOrder(eventId, action)
             }
@@ -19,10 +19,44 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+function addCookieItem(eventId, action){
+    console.log("User is not authenticating")
+
+    if (action === 'add'){
+        if(cart[eventId] === undefined) {
+            cart[eventId] = {'quantity': 1}
+        } else {
+            cart[eventId]['quantity'] += 1
+        }
+    }
+
+    if (action === 'remove'){
+        cart[eventId]['quantity'] -= 1
+
+        if(cart[eventId]['quantity'] <=0) {
+            console.log('Remove item')
+            delete cart[eventId]
+        }
+    }
+
+    if (action === 'delete-item'){
+        console.log('Remove item')
+        delete cart[eventId]
+
+    }
+
+    if (action === 'delete-all'){
+        cart = {}
+    }
+    console.log("Cart:", cart)
+    document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+    location.reload()
+}
+
 function updateUserOrder(eventId, action) {
     console.log('User is logged in, sending data..')
 
-    var url = '/update_item/'
+    let url = '/update_item/';
 
     fetch(url, {
         method: 'POST',

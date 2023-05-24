@@ -23,23 +23,106 @@
         <div class="container">
             <div class="sub-container">
                 <div class="registration submit-form">
-                    <form name="form" method="POST">
+                    <form id="form" name="form">
                         <h2>| Введіть дані |</h2>
-                        <input type="text" class="input submit-input" placeholder="Ім'я">
-                        <input type="email" class="input submit-input" placeholder="Пошта">
-                        <input type="tel" class="input submit-input" placeholder="Телефон (не обов'язково)">
-                        <input type="text" class="input submit-input" placeholder="Номер картки">
+                        <label>
+                            <input name="name" type="text" class="input submit-input" placeholder="Ім'я">
+                        </label>
+                        <label>
+                            <input name="email" type="email" class="input submit-input" placeholder="Пошта">
+                        </label>
+                        <label>
+                            <input name="phone" type="tel" class="input submit-input" placeholder="Телефон (не обов'язково)">
+                        </label>
+                        <label>
+                            <input name="card_number" type="text" class="input submit-input" placeholder="Номер картки">
+                        </label>
                         <div class="card-info">
-                            <input type="date" class="input submit-input part-input-date" placeholder="Дата">
-                            <input type="number" class="input submit-input part-input-code" placeholder="Код">
+                            <label>
+                                <input name="card_date" type="date" class="input submit-input part-input-date" placeholder="Дата">
+                            </label>
+                            <label>
+                                <input name="card_cvv" type="number" class="input submit-input part-input-code" placeholder="Код">
+                            </label>
                         </div>
+
+{#                        <button id="make-payment" type="submit">Оплатити</button>#}
                         <button type="submit">Оплатити</button>
                         <a class="additional-buttom" href="{% url 'order:cart' %}"> Вернутися у кошик </a>
+
                     </form>
+                <button id="make-payment">Оплатити</button>
                 </div>
             </div>
 
         </div>
     </section>
 
+
+<script type="text/javascript">
+
+    let form = document.getElementById('form');
+    let total = '{{ order.get_cart_total|floatformat:2 }}';
+    {#form.addEventListener('submit', function (e) {#}
+    {#    e.preventDefault()#}
+    {#    console.log('Form submitted')#}
+    {#    document.getElementById('form-button').classList.add("hidden")#}
+    {#    document.getElementById('payment').classList.remove("hidden")})#}
+    {#document.getElementById('make-payment').addEventListener('click', function(e){#}
+    {#    submitFromData()})#}
+
+    document.getElementById('make-payment').addEventListener('click', function(e){
+        submitFormData()
+    })
+    function submitFormData(){
+        let customerInfo = {
+            "name": null,
+            "email": null,
+            "phone": null,
+        };
+        console.log('Payment button clicked')
+
+
+        if(user === 'AnonymousUser') {
+
+            customerInfo.name = form.name.value
+            customerInfo.email = form.email.value
+            customerInfo.phone = form.phone.value
+
+        }
+
+        let customerCard = {
+            "total": total,
+            "card_number": null,
+            "card_date": null,
+            "card_cvv": null,
+        };
+
+        customerCard.card_number = form.card_number.value
+        customerCard.card_date = form.card_date.value
+        customerCard.card_cvv = form.card_cvv.value
+
+        let url = '/proces_order/';
+
+        fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type':'application/json',
+            'X-CSRFToken': csrftoken
+        },
+        body:JSON.stringify({'card': customerCard, 'form': customerInfo})
+        })
+        .then((response) => response.json())
+        .then((data => {
+            console.log("Success:", data);
+            alert("Transaction completed");
+
+            cart = {}
+            document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+            window.location.href='{% url 'main:landing' %}'
+        }))
+
+    }
+</script>
 {% endblock %}
+

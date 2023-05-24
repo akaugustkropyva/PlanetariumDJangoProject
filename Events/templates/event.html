@@ -21,18 +21,20 @@
 
     <section class="poster-main-info">
         <div class="container">
-            <h1>
-                {{ event.name }}
-            </h1>
-            {% if is_favourite %}
-                <a href="{% url 'events:favourite_event' event.id %}">
-                    <i class="fa-solid fa-heart fa-lg" style="color: #ffffff;"></i>
-                </a>
-            {% else %}
-                <a href="{% url 'events:favourite_event' event.id %}">
-                    <i class="fa-regular fa-heart fa-lg" style="color: #ffffff;"></i>
-                </a>
-            {% endif %}
+            <div class="event-upper">
+                <h1>
+                    {{ event.name }}
+                </h1>
+                {% if is_favourite %}
+                    <a href="{% url 'events:favourite_event' event.id %}">
+                        <i class="fa-solid fa-heart fa-lg" style="color: #ffffff;"></i>
+                    </a>
+                {% else %}
+                    <a href="{% url 'events:favourite_event' event.id %}">
+                        <i class="fa-regular fa-heart fa-lg" style="color: #ffffff;"></i>
+                    </a>
+                {% endif %}
+            </div>
             <hr>
             <div class="row">
                 <div class="col-12 col-lg-6">

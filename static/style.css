@@ -452,6 +452,20 @@ hr {
   margin-top: 50px;
 }
 
+.poster-main-info .container .event-upper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.poster-main-info .container .event-upper a {
+  margin-bottom: 40px;
+}
+
+.poster-main-info .container .event-upper a .fa-heart {
+  /*resize: ;*/
+}
+
 .poster-main-info .container h1 .user-name {
   color: white;
   text-decoration: none;
@@ -819,6 +833,10 @@ hr {
   transition: 0.3s all;
 }
 
+.cart .history-order-h {
+  height: 120px;
+}
+
 .cart .block {
   margin-top: 20px;
 }
@@ -862,6 +880,26 @@ hr {
 .cart .block .spacing .products-values .update-cart {
   height: 50px;
   width: 50px;
+}
+
+.cart .block .spacing .products-values .review-order {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFD561;
+  color: #311847;
+  width: 200px;
+  height: 40px;
+  text-decoration: none;
+  /*font-family: Podkova, serif;*/
+  font-size: 24px;
+  border-radius: 50px;
+}
+
+.cart .block .spacing .products-values .review-order:hover {
+  border-bottom: 10px solid #311847;
+  text-decoration: underline;
+  transition: 0.3s all;
 }
 
 .cart .block .spacing .products-params .item-param {
@@ -976,7 +1014,10 @@ hr {
   justify-content: space-around;
   align-items: center;
 }
-.profile-length .user-div .user-button button {
+.profile-length .user-div .user-button .user-adds {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 400px;
   height: 85px;
   background-color: #9E7B9B;
@@ -988,7 +1029,7 @@ hr {
   border: 0;
   margin-top: 50px;
 }
-.profile-length .user-div .user-button button:hover {
+.profile-length .user-div .user-button .user-adds:hover {
   border-bottom: 10px solid white;
   text-decoration: underline;
   transition: 0.3s all;
@@ -1147,8 +1188,10 @@ hr {
 }
 .choice-maker .container .row {
   margin-top: 110px;
+  /*display: flex;*/
+  /*justify-content: space-around;*/
 }
-.choice-maker .container .row .col-lg-3 .filter-caption {
+.choice-maker .container .row .search-form .col-lg-3 .filter-caption {
   display: flex;
   justify-content: space-between;
   align-items: center;

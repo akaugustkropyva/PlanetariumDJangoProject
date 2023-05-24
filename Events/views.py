@@ -1,24 +1,19 @@
-from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .models import Event
 
 
-def filters(request, date: str, halls: str, sorting: str):
-    return HttpResponse(f"<h1>All events filtered by {date}, {halls}, {sorting}<h1>")
-
-
 def all_events(request):
-    events = Event.objects.all()
+
     search_query = request.GET.get('search', '')
     date_picker = request.GET.get('date', '')
-    print(date_picker)
     sorting = request.GET.get('sorting', '')
 
-    # print(date_picker)
     if search_query is not None and search_query != ' ':
-        events = events.filter(name__icontains=search_query)
+        events = Event.objects.filter(name__icontains=search_query)
+    else:
+        events = Event.objects.all()
     if date_picker:
-        events = events.filter(date_picker__range=('from_date', 'to_date'))
+        events = events.filter(from_date__lte=date_picker, to_date__gte=date_picker)
     if sorting:
         events = events.order_by(sorting)
     return render(request, "all_events.html", context={'events': events})

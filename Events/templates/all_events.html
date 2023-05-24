@@ -23,34 +23,33 @@
             <hr>
             <form action="" method="get">
                 <div class="row">
-                    <div class="col-4 col-lg-3">
-                            <form  method="GET" action="/all_events/">
+                    <form class="search-form"  method="GET" action="{% url 'events:all_events' %}">
+                        <div class="col-8 col-lg-3">
+                            <input  class="search-input" type="date" placeholder="Дата" aria-label="Дата"
+                                    name="date">
+                        </div>
+                        <div class="col-4 col-lg-3">
                                 <input class="search-input" type="search" placeholder="Пошук" aria-label="Пошук"
                                        name="search">
-                            </form>
-                    </div>
-                    <div class="col-8 col-lg-3">
-                            <form  method="GET" action="/all_events/">
-                                <input class="search-input" id="datepicker" type="date" placeholder="Дата" aria-label="Дата"
-                                       name="date">
-                            </form>
-                    </div>
-                    <div class="col-12 col-lg-3">
-                        <label>
-                            <select name="sorting" id="sort-list" class="choicebox order">
-                                    <option value="" id="placeholder" disabled selected hidden>Сортування</option>
-                                    <option value="name" id="name">Від А до Я</option>
-                                    <option value="-name" id="-name">Від Я до А</option>
-                                    <option value="price" id="price">Найдешевші</option>
-                                    <option value="-price" id="-price">Найдорожчі</option>
-                                    <option value="-popularity" id="-popularity">Найпопулярніші</option>
-                                    <option value="popularity" id="popularity">Найнепопулярніші</option>
-                            </select>
-                        </label>
-                    </div>
-                    <div class="form">
-                        <button type="submit" class="search">Пошук</button>
-                    </div>
+                        </div>
+
+                        <div class="col-12 col-lg-3">
+                            <label>
+                                <select name="sorting" id="sort-list" class="choicebox order">
+                                        <option value="" id="placeholder" disabled selected hidden>Сортування</option>
+                                        <option value="name" id="name">Від А до Я</option>
+                                        <option value="-name" id="-name">Від Я до А</option>
+                                        <option value="price" id="price">Найдешевші</option>
+                                        <option value="-price" id="-price">Найдорожчі</option>
+                                        <option value="-popularity" id="-popularity">Найпопулярніші</option>
+                                        <option value="popularity" id="popularity">Найнепопулярніші</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="form">
+                            <button type="submit" class="search">Пошук</button>
+                        </div>
+                    </form>
                 </div>
             </form>
         </div>
@@ -123,14 +122,15 @@
     {#        document.getElementById('placeholder').innerHTML = document.getElementById(get('sorting')).innerHTML;#}
 
 
-    {#function sort_events() {#}
-    {#    var url = new URL(window.location.href);#}
-    {#    var search_params = url.searchParams;#}
-    {#    search_params.set('sorting', document.getElementById("sort-list").value);#}
-    {#    url.search = search_params.toString();#}
-    {#    var new_url = url.toString();#}
-    {#    console.log(new_url);#}
-    {#    return new_url#}
-    {##}
-
+{#    function sort_events() {#}
+{#        var url = new URL(window.location.href);#}
+{#        var search_params = url.searchParams;#}
+{#        search_params.set('date-picker', document.getElementById("date").value);#}
+{#        url.search = search_params.toString();#}
+{#        var new_url = url.toString();#}
+{#        console.log(new_url);#}
+{#        return new_url;#}
+{#    }#}
+{##}
+{#</script>#}
 {#{% endblock %}#}

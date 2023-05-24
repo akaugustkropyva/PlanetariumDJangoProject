@@ -1,5 +1,5 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
 from .models import Event
 
 
@@ -25,5 +25,17 @@ def all_events(request):
 
 
 def event(request, parameter):
-    eventname = Event.objects.get(id=parameter)
-    return render(request, "event.html", context={'event': eventname})
+    event = Event.objects.get(id=parameter)
+    is_favourite = False
+    if event.favourite.filter(id=request.user.id).exists():
+        is_favourite = True
+    return render(request, "event.html", context={'event': event, "is_favourite": is_favourite})
+
+
+def favourite_event(request, parameter):
+    event = Event.objects.get(id=parameter)
+    if event.favourite.filter(id=request.user.id).exists():
+        event.favourite.remove(request.user)
+    else:
+        event.favourite.add(request.user)
+    return redirect('events:event', parameter=parameter)

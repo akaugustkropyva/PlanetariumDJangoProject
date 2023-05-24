@@ -38,4 +38,7 @@ def order_info(request, parameter):
 
 
 def wishlist(request):
-    return HttpResponse("<h1>User's wishlist<h1>")
+    user = request.user
+    favourite_event = user.favourite.all()
+
+    return render(request, "wishlist.html", context={'events': favourite_event})

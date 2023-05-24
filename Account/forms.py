@@ -4,6 +4,8 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
 from django import forms
 
+from User.models import Customer
+
 
 class RegisterForm(UserCreationForm):
 
@@ -16,7 +18,6 @@ class RegisterForm(UserCreationForm):
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError('Ця пошта вже використовується')
         return email
-
 
 class LoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):

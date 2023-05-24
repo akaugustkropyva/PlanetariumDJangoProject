@@ -1,0 +1,83 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+    {{ event.name }}
+{% endblock %}
+
+{% block content %}
+
+{% if orders %}
+    <section class="links links-info-page">
+        <div class="container">
+            <a href="{% url 'main:landing' %}">На головну</a>
+            <p>&nbsp|&nbsp</p>
+            <a href="{% url 'user:profile' %}">Профіль</a>
+        </div>
+    </section>
+
+    <section class="additional-info-block cart" id="cart-container">
+        <div class="container">
+            <h1>
+                Історія замовлень
+            </h1>
+            <hr>
+
+            <div class="block" id="cart-form">
+                <div class="spacing">
+                    <div class="products-params">
+                        <div class="item-param item-param-name">
+                                Номер замовлення
+                        </div>
+                        <div class="item-param item-value-price">
+                               Дата
+                        </div>
+                        <div class="item-param item-value-price">
+                                Сума
+                        </div>
+                        <div class="item-param item-value-price"></div>
+                    </div>
+                    <hr>
+                    {% for order in reversed_orders %}
+                        {% if order.complete %}
+                            <div class="products-params products-values">
+                                <div class="item-param item-param-name">
+                                        Замовлення №{{ order.transaction_id }}
+                                </div>
+                                <div class="item-param item-value-price">
+                                       {{ order.date_ordered|date:"d-m-y" }}
+                                </div>
+                                <div class="item-param item-value-price">
+                                        {{ order.total }} грн.
+                                </div>
+                                <a class="name" href="{% url 'user:order_info' order.id %}">Переглянути замовлення</a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+{% else %}
+    <div class="container">
+        <h1>
+            Історія порожня...
+        </h1>
+    </div>
+
+{% endif %}
+
+    <script>
+        var itemCount = {{ orders|length }};
+        var cartForm = document.getElementById("cart-form");
+        var cartContainer = document.getElementById("cart-container");
+        var heightForm = 600 + (itemCount - 4) * 110;
+        var heightContainer = 1100 + (itemCount - 4) * 110;
+        cartForm.style.height = heightForm + "px";
+        cartContainer.style.height = heightContainer + "px";
+    </script>
+
+
+{% endblock %}

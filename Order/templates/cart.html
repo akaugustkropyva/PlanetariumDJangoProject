@@ -18,7 +18,7 @@
         </div>
     </section>
 
-    <section class="additional-info-block cart">
+    <section class="additional-info-block cart" id="cart-container">
         <div class="container">
             <h1>
                 Кошик
@@ -42,7 +42,7 @@
                         </div>
                     </div>
             </div>
-            <div class="block">
+            <div class="block" id="cart-form">
                 <div class="spacing">
                     <div class="products-params">
                         <div class="item-param delete-item">
@@ -98,6 +98,16 @@
         </div>
     </section>
 
+
+    <script>
+        var itemCount = {{ items|length }};
+        var cartForm = document.getElementById("cart-form");
+        var cartContainer = document.getElementById("cart-container");
+        var heightForm = 600 + (itemCount - 4) * 110;
+        var heightContainer = 1100 + (itemCount - 4) * 110;
+        cartForm.style.height = heightForm + "px";
+        cartContainer.style.height = heightContainer + "px";
+    </script>
 
 {% else %}
     <div class="container">

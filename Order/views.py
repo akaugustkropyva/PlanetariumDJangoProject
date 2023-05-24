@@ -1,9 +1,11 @@
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.shortcuts import render
-
 from Events.models import Event
 from Order.models import Order, OrderItem
+from User.models import Customer
+from .utils import cookieCard
 import json
+import datetime
 
 
 def cart(request):
@@ -12,9 +14,20 @@ def cart(request):
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
     else:
-        items = []
-        order = {'get_cart_total': 0, 'det_cart_total': 0}
+        cookieData = cookieCard(request)
+        order = cookieData['order']
+        items = cookieData['items']
     return render(request, "cart.html", {'items': items, 'order': order})
+
+
+def submit(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+    else:
+        cookieData = cookieCard(request)
+        order = cookieData['order']
+    return render(request, "submit.html", {'order': order})
 
 
 def updateItem(request):
@@ -47,5 +60,54 @@ def updateItem(request):
     return JsonResponse('Cart was changed', safe=False)
 
 
-def submit(request):
-    return render(request, "submit.html")
+def procesOrder(request):
+    # print(request.body)
+    transaction_id = datetime.datetime.now().timestamp()
+    data = json.loads(request.body)
+
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+
+    else:
+        print("COOKIES", request.COOKIES)
+        name = data['form']['name']
+        email = data['form']['email']
+        phone = data['form']['phone']
+
+        cookieData = cookieCard(request)
+        items = cookieData['items']
+
+        customer, created = Customer.objects.get_or_create(
+            email=email,
+        )
+        customer.name = name
+        customer.phone = phone
+
+        customer.save()
+
+        order = Order.objects.create(
+            customer=customer,
+            complete=False,
+        )
+
+        for item in items:
+            event = Event.objects.get(id=item['event']['id'])
+
+            orderItem = OrderItem.objects.create(
+                event=event,
+                order=order,
+                quantity=item['quantity'],
+            )
+
+    total = float(data['card']['total'])
+    card_number = float(data['card']['card_number'])
+    order.transaction_id = transaction_id
+
+    if total == order.get_cart_total:
+        order.complete = True
+        order.total = total
+        order.card_number = card_number
+    order.save()
+
+    return JsonResponse('Payment complete!', safe=False)

@@ -1,5 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+
+from Order.models import Order
 from .forms import CustomerForm
 
 
@@ -23,12 +25,16 @@ def user_change(request):
 
 
 def history(request):
-    return HttpResponse("<h1>History<h1>")
+    customer = request.user.customer
+    orders = Order.objects.filter(customer=customer)
+    reversed_orders = reversed(orders)
+    return render(request, "history.html", {"orders": orders, "reversed_orders": reversed_orders})
 
 
 def order_info(request, parameter):
-    request.parameter = parameter
-    return HttpResponse(f"<h1>Order info {parameter}<h1>")
+    order = Order.objects.get(id=parameter)
+    items = order.orderitem_set.all()
+    return render(request, "order_info.html", context={'order': order, 'items': items})
 
 
 def wishlist(request):

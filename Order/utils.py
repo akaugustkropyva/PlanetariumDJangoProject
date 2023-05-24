@@ -9,7 +9,7 @@ def cookieCard(request):
         cart = {}
 
     items = []
-    order = {'get_cart_total': 0, 'get_cart_item': 0}
+    order = {'get_cart_total': 0, 'get_cart_items': 0}
 
     for i in cart:
         try:
@@ -17,7 +17,7 @@ def cookieCard(request):
             total = (event.price * cart[i]['quantity'])
 
             order['get_cart_total'] += total
-            order['get_cart_item'] += cart[i]['quantity']
+            order['get_cart_items'] += cart[i]['quantity']
 
             item = {
                 'event': {

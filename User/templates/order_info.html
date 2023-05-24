@@ -1,0 +1,98 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+    {{ event.name }}
+{% endblock %}
+
+{% block content %}
+
+{% if items %}
+    <section class="links links-info-page">
+        <div class="container">
+            <a href="{% url 'main:landing' %}">На головну</a>
+            <p>&nbsp|&nbsp</p>
+            <a href="{% url 'user:profile' %}">Профіль</a>
+            <p>&nbsp|&nbsp</p>
+            <a href="{% url 'user:history' %}">Історія</a>
+        </div>
+    </section>
+
+    <section class="additional-info-block cart" id="cart-container">
+        <div class="container">
+            <h1>
+                Замовлення №{{ order.transaction_id }}
+            </h1>
+            <hr>
+
+            <div class="block" id="cart-form">
+                <div class="spacing">
+                    <div class="products-params">
+                        <div class="item-param delete-item">
+                        </div>
+                        <div class="item-param">
+                        </div>
+                        <div class="item-param item-param-name">
+                                Назва
+                        </div>
+                        <div class="item-param item-value-price">
+                                Ціна
+                        </div>
+                        <div class="item-param">
+                                Кількість
+                        </div>
+                        <div class="item-param item-value-price">
+                                Сумарно
+                        </div>
+                    </div>
+                    <hr>
+                        {% for item in items %}
+                        <div class="products-params products-values">
+                            <div class="item-param delete-item">
+
+                            </div>
+                            <div class="item-param">
+                                <img src="{{ item.event.image.url }}" alt="">
+                            </div>
+                            <div class="item-param item-param-name">
+                                    {{ item.event.name }}
+                            </div>
+                            <div class="item-param item-value-price">
+                                    {{ item.event.price }} грн.
+                            </div>
+                            <div class="item-param">
+                                    {{ item.quantity }}
+                            </div>
+
+                            <div class="item-param item-value-price">
+                                    {{ item.get_total }} грн.
+                            </div>
+                        </div>
+                        {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+{% else %}
+    <div class="container">
+        <h1>
+            Упс помилка...
+        </h1>
+    </div>
+
+{% endif %}
+
+    <script>
+        var itemCount = {{ items|length }};
+        var cartForm = document.getElementById("cart-form");
+        var cartContainer = document.getElementById("cart-container");
+        var heightForm = 600 + (itemCount - 4) * 110;
+        var heightContainer = 1100 + (itemCount - 4) * 110;
+        cartForm.style.height = heightForm + "px";
+        cartContainer.style.height = heightContainer + "px";
+    </script>
+
+
+{% endblock %}

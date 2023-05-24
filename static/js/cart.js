@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function() {
     updateButton = document.getElementsByClassName('update-cart');
 

@@ -22,7 +22,6 @@
                 Історія замовлень
             </h1>
             <hr>
-
             <div class="block" id="cart-form">
                 <div class="spacing">
                     <div class="products-params">
@@ -50,7 +49,7 @@
                                 <div class="item-param item-value-price">
                                         {{ order.total }} грн.
                                 </div>
-                                <a class="name" href="{% url 'user:order_info' order.id %}">Переглянути замовлення</a>
+                                <a  class="review-order" href="{% url 'user:order_info' order.id %}">Переглянути</a>
                             </div>
                         {% endif %}
                     {% endfor %}

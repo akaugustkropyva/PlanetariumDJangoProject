@@ -9,15 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Podkova&display=swap" rel="stylesheet">
-{#    <link rel="stylesheet" type="text/css" href="{% static "/style.css" %}"  />#}
-    <link rel="stylesheet" type="text/css" href="{% static "/style.css" %}?"  />
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-
-    <!-- Fengyuan Chen's Datepicker -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "/style.css" %}"  />
+{#    <link rel="stylesheet" type="text/css" href="{% static "/style.css" %}?v=1"  />#}
     <script src="https://kit.fontawesome.com/a165d9a4c1.js" crossorigin="anonymous"></script>
     <script src={% static "js/cart.js" %}></script>
     <script type="text/javascript">
@@ -29,7 +22,6 @@
                 const cookies = document.cookie.split(';');
                 for (let i = 0; i < cookies.length; i++) {
                     const cookie = cookies[i].trim();
-                    // Does this cookie string begin with the name we want?
                     if (cookie.substring(0, name.length + 1) === (name + '=')) {
                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                         break;

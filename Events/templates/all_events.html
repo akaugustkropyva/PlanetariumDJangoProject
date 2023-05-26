@@ -21,19 +21,37 @@
                 Афіша подій
             </h1>
             <hr>
-            <form action="" method="get">
+            <form class="search-form"  method="GET" action="{% url 'events:all_events' %}">
                 <div class="row">
-                    <form class="search-form"  method="GET" action="{% url 'events:all_events' %}">
-                        <div class="col-8 col-lg-3">
+                        <div class="col-8 col-lg-3 sorting-boxes">
                             <input  class="search-input" type="date" placeholder="Дата" aria-label="Дата"
                                     name="date">
                         </div>
-                        <div class="col-4 col-lg-3">
+                        <div class="col-4 col-lg-3 sorting-boxes">
                                 <input class="search-input" type="search" placeholder="Пошук" aria-label="Пошук"
                                        name="search">
                         </div>
-
-                        <div class="col-12 col-lg-3">
+                        <div class="col-12 col-lg-3 box-form">
+                            <div class="check-boxes">
+                                <label>
+                                    Мала зала
+                                    <input type="checkbox" name="hall" value="1">
+                                </label>
+                            </div>
+                            <div class="check-boxes">
+                                <label>
+                                    Велика зала
+                                    <input type="checkbox" name="hall" value="2">
+                                </label>
+                            </div>
+                            <div class="check-boxes">
+                                <label>
+                                    Зоряна зала
+                                    <input type="checkbox" name="hall" value="3">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-3 sorting-boxes">
                             <label>
                                 <select name="sorting" id="sort-list" class="choicebox order">
                                         <option value="" id="placeholder" disabled selected hidden>Сортування</option>
@@ -49,7 +67,6 @@
                         <div class="form">
                             <button type="submit" class="search">Пошук</button>
                         </div>
-                    </form>
                 </div>
             </form>
         </div>
@@ -77,60 +94,78 @@
                         </div>
                     </div>
                 {% endfor %}
-                <div class="form">
-                </div>
+
+
+{#                <ul class="pagination">#}
+{#                    <li class="page-item">#}
+{#                        <a class="page-link" href="" rel="prev" aria-label="&laquo; Previous">&lsaquo;</a>#}
+{#                    </li>#}
+{#                    <li class="page-item">#}
+{#                        <a class="page-link" href="">1</a>#}
+{#                    </li>#}
+{#                    <li class="page-item active" aria-current="page">#}
+{#                        <span class="page-link">2</span>#}
+{#                    </li>#}
+{#                    <li class="page-item">#}
+{#                        <a class="page-link" href="">3</a>#}
+{#                    </li>#}
+{#                    <li class="page-item">#}
+{#                        <a class="page-link" href="">4</a>#}
+{#                    </li>#}
+{#                    <li class="page-item">#}
+{#                        <a class="page-link" href="" rel="next" aria-label="Next &raquo;">&rsaquo;</a>#}
+{#                    </li>#}
+{#                </ul>#}
+
+
             {% else %}
                 <h1>
                     На жаль, подій нема...
                 </h1>
             {% endif %}
         </div>
+        <div class="pagination-form">
+              <ul class="pagination">
+                    {% if events.has_previous %}
+                        <li class="page-item">
+                            <a href="?page=1">&laquo;</a>
+                            <a href="?page={{ events.previous_page_number }}" rel="prev" aria-label="&laquo; Previous">&lsaquo;</a>
+                        </li>
+                    {% endif %}
+                    <div class="current">
+                        <p class="current-page">{{ events.number }}</p>
+                        <p>/</p>
+                        <p>{{ events.paginator.num_pages }}</p>
+                    </div>
+                    {% if events.has_next %}
+                        <li class="page-item">
+                            <a href="?page={{ events.next_page_number }}" rel="next" aria-label="Next &raquo;">&rsaquo;</a>
+                            <a href="?page={{ events.paginator.num_pages }}">&raquo;</a>
+                        </li>
+                    {% endif %}
+              </ul>
+        </div>
+
+
+{#        <div class="pagination">#}
+{#            <span class="step-links">#}
+{#                {% if events.has_previous %}#}
+{#                    <a href="?page=1">&laquo; first</a>#}
+{#                    <a href="?page={{ events.previous_page_number }}">previous</a>#}
+{#                {% endif %}#}
+{##}
+{#                <span class="current">#}
+{#                    Page {{ events.number }} of {{ events.paginator.num_pages }}.#}
+{#                </span>#}
+{##}
+{#                {% if events.has_next %}#}
+{#                    <a href="?page={{ events.next_page_number }}">next</a>#}
+{#                    <a href="?page={{ events.paginator.num_pages }}">last &raquo;</a>#}
+{#                {% endif %}#}
+{#            </span>#}
+{#        </div>#}
     </div>
 </section>
 
-{#<script>#}
-    {#$(function () {#}
-    {#  $("#datepicker").datepicker({#}
-    {#      format:'yyyy-mm-dd'#}
-    {#  });#}
-    {# });#}
-
-    {#function get(name) {#}
-    {#    if (name === (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(location.search))#}
-    {#        return decodeURIComponent(name[1]);#}
-    {##}
-    {##}
-    {#if(get('sorting'))#}
-    {#    document.getElementById('placeholder').innerHTML = document.getElementById(get('sorting')).innerHTML;#}
-
-
-{#</script>#}
 
 {% endblock %}
-
-{#{% block js %}#}
-{#<script>#}
-{#    $(function () {#}
-{#      $("#datepicker").datepicker();#}
-{#    });#}
-    {#function get(name) {#}
-    {#    if (name === (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(location.search))#}
-    {#      return decodeURIComponent(name[1]);#}
-    {##}
-    {##}
-    {#if(get('sorting'))#}
-    {#        document.getElementById('placeholder').innerHTML = document.getElementById(get('sorting')).innerHTML;#}
-
-
-{#    function sort_events() {#}
-{#        var url = new URL(window.location.href);#}
-{#        var search_params = url.searchParams;#}
-{#        search_params.set('date-picker', document.getElementById("date").value);#}
-{#        url.search = search_params.toString();#}
-{#        var new_url = url.toString();#}
-{#        console.log(new_url);#}
-{#        return new_url;#}
-{#    }#}
-{##}
-{#</script>#}
-{#{% endblock %}#}

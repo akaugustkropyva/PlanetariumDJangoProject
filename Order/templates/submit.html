@@ -19,39 +19,36 @@
         </div>
     </section>
 
+
     <section class="posters-block posters-block-register">
         <div class="container">
+            {% for field_errors in form.errors.values %}
+                {% for error in field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
             <div class="sub-container">
                 <div class="registration submit-form">
-                    <form id="form" name="form">
+                    <form id="form" name="form" method="POST">
                         <h2>| Введіть дані |</h2>
-                        <label>
-                            <input name="name" type="text" class="input submit-input" placeholder="Ім'я">
-                        </label>
-                        <label>
-                            <input name="email" type="email" class="input submit-input" placeholder="Пошта">
-                        </label>
-                        <label>
-                            <input name="phone" type="tel" class="input submit-input" placeholder="Телефон (не обов'язково)">
-                        </label>
-                        <label>
-                            <input name="card_number" type="text" class="input submit-input" placeholder="Номер картки">
-                        </label>
+                        {% csrf_token %}
+
+                            {{ form.name }}
+                            {{ form.email }}
+                            {{ form.phone }}
+                            {{ form.card_number }}
                         <div class="card-info">
-                            <label>
-                                <input name="card_date" type="date" class="input submit-input part-input-date" placeholder="Дата">
-                            </label>
-                            <label>
-                                <input name="card_cvv" type="number" class="input submit-input part-input-code" placeholder="Код">
-                            </label>
+                            {{ form.card_date }}
+                            {{ form.card_cvv }}
                         </div>
 
-{#                        <button id="make-payment" type="submit">Оплатити</button>#}
-                        <button type="submit">Оплатити</button>
-                        <a class="additional-buttom" href="{% url 'order:cart' %}"> Вернутися у кошик </a>
+                        <button id="form-button" type="submit" >Перевірити</button>
+                        <button id="make-payment" class="hidden">Оплатити</button>
+                        <a id="form-button" class="additional-buttom " href="{% url 'order:cart' %}"> Вернутися у кошик </a>
+{#                        <button id="make-payment" >Оплатити</button>#}
 
                     </form>
-                <button id="make-payment">Оплатити</button>
+
                 </div>
             </div>
 
@@ -59,70 +56,95 @@
     </section>
 
 
-<script type="text/javascript">
+    <script>
+		var form_fields = document.getElementsByTagName('input')
+		form_fields[1].placeholder="Ім'я";
+		form_fields[2].placeholder='Пошта';
+		form_fields[3].placeholder="Телефон (не обов'язково)";
+		form_fields[4].placeholder='Номер картки';
+		form_fields[6].placeholder='Код';
 
-    let form = document.getElementById('form');
-    let total = '{{ order.get_cart_total|floatformat:2 }}';
-    {#form.addEventListener('submit', function (e) {#}
-    {#    e.preventDefault()#}
-    {#    console.log('Form submitted')#}
-    {#    document.getElementById('form-button').classList.add("hidden")#}
-    {#    document.getElementById('payment').classList.remove("hidden")})#}
-    {#document.getElementById('make-payment').addEventListener('click', function(e){#}
-    {#    submitFromData()})#}
+		for (var field in form_fields){
+			form_fields[field].className += 'input submit-input'
+		}
 
-    document.getElementById('make-payment').addEventListener('click', function(e){
-        submitFormData()
-    })
-    function submitFormData(){
-        let customerInfo = {
-            "name": null,
-            "email": null,
-            "phone": null,
-        };
-        console.log('Payment button clicked')
+        form_fields[5].className += 'input submit-input part-input-date'
+        form_fields[6].className += 'input submit-input part-input-code'
+
+        if(user !== 'AnonymousUser') {
+            form_fields[1].className += 'input submit-input disabled-field'
+            form_fields[2].className += 'input submit-input disabled-field'
+            form_fields[3].className += 'input submit-input disabled-field'
+        }
+    </script>
+
+    {% if form_validated %}
+        <script>
+            console.log('Form submitted');
+            document.getElementById('form-button').classList.add("hidden");
+            document.getElementById('make-payment').classList.remove("hidden");
+        </script>
+    {% endif %}
+
+    <script type="text/javascript">
+
+        let form = document.getElementById('form');
+        let total = '{{ order.get_cart_total|floatformat:2 }}';
+
+        document.getElementById('make-payment').addEventListener('click', function(e){
+            submitFormData()
+        })
+
+        function submitFormData(){
+            let customerInfo = {
+                "name": null,
+                "email": null,
+                "phone": null,
+            };
+            console.log('Payment button clicked')
 
 
-        if(user === 'AnonymousUser') {
+            if(user === 'AnonymousUser') {
 
-            customerInfo.name = form.name.value
-            customerInfo.email = form.email.value
-            customerInfo.phone = form.phone.value
+                customerInfo.name = form.name.value
+                customerInfo.email = form.email.value
+                customerInfo.phone = form.phone.value
+
+            }
+
+            let customerCard = {
+                "total": total,
+                "card_number": null,
+                "card_date": null,
+                "card_cvv": null,
+            };
+
+            console.log(form.card_number.value)
+            customerCard.card_number = form.card_number.value
+            customerCard.card_date = form.card_date.value
+            customerCard.card_cvv = form.card_cvv.value
+
+            let url = '/proces_order/';
+
+            fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json',
+                'X-CSRFToken': csrftoken
+            },
+            body:JSON.stringify({'card': customerCard, 'form': customerInfo})
+            })
+            .then((response) => response.json())
+            .then((data => {
+                console.log("Success:", data);
+                alert("Transaction completed");
+
+                cart = {}
+                document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+                window.location.href='{% url 'main:landing' %}'
+            }))
 
         }
-
-        let customerCard = {
-            "total": total,
-            "card_number": null,
-            "card_date": null,
-            "card_cvv": null,
-        };
-
-        customerCard.card_number = form.card_number.value
-        customerCard.card_date = form.card_date.value
-        customerCard.card_cvv = form.card_cvv.value
-
-        let url = '/proces_order/';
-
-        fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type':'application/json',
-            'X-CSRFToken': csrftoken
-        },
-        body:JSON.stringify({'card': customerCard, 'form': customerInfo})
-        })
-        .then((response) => response.json())
-        .then((data => {
-            console.log("Success:", data);
-            alert("Transaction completed");
-
-            cart = {}
-            document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
-            window.location.href='{% url 'main:landing' %}'
-        }))
-
-    }
-</script>
+    </script>
 {% endblock %}
 

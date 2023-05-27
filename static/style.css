@@ -672,6 +672,11 @@ hr {
   border-radius: 5px;
 }
 
+.posters-block .sub-container .registration form .disabled-field {
+  color: #999999;
+  background-color: #f2f2f2;
+}
+
 .posters-block .sub-container .registration form button {
   display: flex;
   justify-content: center;
@@ -692,6 +697,11 @@ hr {
   text-decoration: underline;
   transition: 0.3s all;
 }
+
+.posters-block .sub-container .registration form .hidden{
+  display: none;
+}
+
 .posters-block .sub-container .registration form .additional-buttom {
   color: white;
   text-align: center;
@@ -705,6 +715,7 @@ hr {
 .posters-block .sub-container .registration form .additional-buttom:hover {
   text-decoration: underline;
 }
+
 .posters-block .sub-container .registration-login {
   height: 450px;
 }

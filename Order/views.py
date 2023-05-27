@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from Events.models import Event
 from Order.models import Order, OrderItem
+from .forms import OrderForm
 from User.models import Customer
 from .utils import cookieCard
 import json
@@ -21,13 +22,23 @@ def cart(request):
 
 
 def submit(request):
+    form_validated = False
+    customer = None
+
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        form = OrderForm(instance=customer)
     else:
         cookieData = cookieCard(request)
         order = cookieData['order']
-    return render(request, "submit.html", {'order': order})
+        form = OrderForm()
+
+    if request.method == 'POST':
+        form = OrderForm(request.POST, request.FILES, instance=customer)
+        if form.is_valid():
+            form_validated = True
+    return render(request, "submit.html", {'order': order, 'form': form, 'form_validated': form_validated})
 
 
 def updateItem(request):
@@ -70,7 +81,7 @@ def procesOrder(request):
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
 
     else:
-        print("COOKIES", request.COOKIES)
+        # print("COOKIES", request.COOKIES)
         name = data['form']['name']
         email = data['form']['email']
         phone = data['form']['phone']

@@ -31,7 +31,7 @@ class CustomerForm(forms.ModelForm):
         if name and User.objects.filter(username=name).exists():
             if self.instance and self.instance.user.username == name:
                 return name
-            raise forms.ValidationError("Це ім'я вже використовується!")
+            raise forms.ValidationError("Це ім'я вже використовується")
         return name
 
     def clean_email(self):
@@ -39,7 +39,7 @@ class CustomerForm(forms.ModelForm):
         if email and User.objects.filter(email=email).exists():
             if self.instance and self.instance.user.email == email:
                 return email
-            raise forms.ValidationError('Ця пошта вже використовується')
+            raise forms.ValidationError('Цей email вже використовується')
         return email
 
     def clean_phone(self):

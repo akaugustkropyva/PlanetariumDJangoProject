@@ -15,42 +15,60 @@
             {% endfor %}
 
             <h1>
-                <a class="user-name" href="{% url 'user:profile' %}">{{ request.user.customer.name }}</a>
+                {% if not user.is_superuser %}
+                    <a class="user-name" href="{% url 'user:profile' %}">{{ request.user.customer.name }}</a>
+                {% else %}
+                    <a class="user-name" href="{% url 'user:profile' %}">admin</a>
+                {% endif %}
             </h1>
             <hr>
             <div class="row">
                 <div class="col-12 col-lg-6">
                     <div class="block">
-                        <img src="{{ request.user.customer.profile_pic.url }}" alt="">
+                        {% if not user.is_superuser %}
+                            <img src="{{ request.user.customer.profile_pic.url }}" alt="">
+                        {% else %}
+                            <img src="/media/images/default_user.jpg" alt="">
+                        {% endif %}
                     </div>
                 </div>
-                <div class="col-12 col-lg-6">
-                    <div class="full-poster-info">
-                        <div class="written-info">
-                            <p>Телефон:<br> {{ request.user.customer.phone }}</p>
+                {% if not user.is_superuser %}
+                    <div class="col-12 col-lg-6">
+                        <div class="full-poster-info">
+                            <div class="written-info">
+                                <p>Телефон:<br> {{ request.user.customer.phone }}</p>
+                            </div>
+                            <div class="written-info">
+                                <p>Пошта:<br> {{ request.user.customer.email }}</p>
+                            </div>
                         </div>
-                        <div class="written-info">
-                            <p>Пошта:<br> {{ request.user.customer.email }}</p>
+                        <div class="button">
+                            <a class="logout-button" href="{% url 'user:profile_change' %}">Редагувати дані</a>
                         </div>
                     </div>
-                    <div class="button">
-                        <a class="logout-button" href="{% url 'user:profile_change' %}">Редагувати дані</a>
+                {% else %}
+                    <div class="col-12 col-lg-6">
+                        <div class="button">
+                                <a class="logout-button" href="{% url 'administrator:banusers' %}">Управління юзерами</a>
+                            </div>
                     </div>
-                </div>
+                {% endif %}
             </div>
         </div>
     </section>
 
     <section class="additional-info-block additional-info-block-info-page profile-length">
         <div class="container">
-            <div class="user-div">
-                <div class="user-button">
-                    <a class="user-adds" href="{% url 'user:history' %}">Історія замовлень</a>
+            {% if not user.is_superuser %}
+                <div class="user-div">
+                    <div class="user-button">
+                        <a class="user-adds" href="{% url 'user:history' %}">Історія замовлень</a>
+                    </div>
+                    <div class="user-button">
+                        <a class="user-adds" href="{% url 'user:wishlist' %}">Список бажань</a>
+                    </div>
                 </div>
-                <div class="user-button">
-                    <a class="user-adds" href="{% url 'user:wishlist' %}">Список бажань</a>
-                </div>
-            </div>
+            {% endif %}
             <div class="form">
                 <a class="logout-button" href="{% url 'account:logout' %}">Вийти</a>
             </div>

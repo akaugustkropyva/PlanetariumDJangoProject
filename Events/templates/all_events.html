@@ -90,33 +90,12 @@
                             </div>
                             <hr class="poster-hr">
                             <p class="price">{{ event.price }} ГРН.</p>
-                            <button data-event="{{ event.id }}" data-action="add" class="update-cart">Додати у кошик</button>
+                            {% if not user.is_superuser %}
+                                <button data-event="{{ event.id }}" data-action="add" class="update-cart">Додати у кошик</button>
+                            {% endif %}
                         </div>
                     </div>
                 {% endfor %}
-
-
-{#                <ul class="pagination">#}
-{#                    <li class="page-item">#}
-{#                        <a class="page-link" href="" rel="prev" aria-label="&laquo; Previous">&lsaquo;</a>#}
-{#                    </li>#}
-{#                    <li class="page-item">#}
-{#                        <a class="page-link" href="">1</a>#}
-{#                    </li>#}
-{#                    <li class="page-item active" aria-current="page">#}
-{#                        <span class="page-link">2</span>#}
-{#                    </li>#}
-{#                    <li class="page-item">#}
-{#                        <a class="page-link" href="">3</a>#}
-{#                    </li>#}
-{#                    <li class="page-item">#}
-{#                        <a class="page-link" href="">4</a>#}
-{#                    </li>#}
-{#                    <li class="page-item">#}
-{#                        <a class="page-link" href="" rel="next" aria-label="Next &raquo;">&rsaquo;</a>#}
-{#                    </li>#}
-{#                </ul>#}
-
 
             {% else %}
                 <h1>
@@ -145,25 +124,6 @@
                     {% endif %}
               </ul>
         </div>
-
-
-{#        <div class="pagination">#}
-{#            <span class="step-links">#}
-{#                {% if events.has_previous %}#}
-{#                    <a href="?page=1">&laquo; first</a>#}
-{#                    <a href="?page={{ events.previous_page_number }}">previous</a>#}
-{#                {% endif %}#}
-{##}
-{#                <span class="current">#}
-{#                    Page {{ events.number }} of {{ events.paginator.num_pages }}.#}
-{#                </span>#}
-{##}
-{#                {% if events.has_next %}#}
-{#                    <a href="?page={{ events.next_page_number }}">next</a>#}
-{#                    <a href="?page={{ events.paginator.num_pages }}">last &raquo;</a>#}
-{#                {% endif %}#}
-{#            </span>#}
-{#        </div>#}
     </div>
 </section>
 

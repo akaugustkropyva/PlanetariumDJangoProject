@@ -63,10 +63,11 @@
                             <p class="price">{{ event.price }} ГРН.</p>
                         </div>
                     </div>
-                    <div class="button">
-                        <button data-event="{{ event.id }}" data-action="add" class="update-cart">Додати у кошик</button>
-                    </div>
-
+                    {% if not user.is_superuser %}
+                        <div class="button">
+                            <button data-event="{{ event.id }}" data-action="add" class="update-cart">Додати у кошик</button>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

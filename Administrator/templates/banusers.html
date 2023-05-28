@@ -1,0 +1,97 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+    Користувачі
+{% endblock %}
+
+{% block content %}
+
+{% if users %}
+    <section class="links links-info-page">
+        <div class="container">
+            <a href="{% url 'main:landing' %}">На головну</a>
+            <p>&nbsp|&nbsp</p>
+            <a href="{% url 'user:profile' %}">Профіль</a>
+        </div>
+    </section>
+
+    <section class="additional-info-block cart" id="cart-container">
+        <div class="container">
+            <h1>
+                Користувачі
+            </h1>
+            <hr>
+            <div class="block" id="cart-form">
+                <div class="spacing">
+                    <div class="products-params">
+                        <div class="item-param item-param-name">
+                            Ім'я користувача
+                        </div>
+                        <div class="item-param item-value-price">
+                        </div>
+                        <div class="item-param item-value-price">
+                            Статус
+                        </div>
+                        <div class="item-param item-value-price">
+                        </div>
+                    </div>
+                    <hr>
+                    {% for user in users %}
+                        {% if not user.is_superuser %}
+                            <div class="products-params products-values">
+                                <div class="item-param item-param-name">
+                                        {{ user.username }}
+                                </div>
+                                <div class="item-param item-value-price">
+                                </div>
+                                <div class="item-param item-value-price">
+                                    {% if user.banstatus.is_banned == False %}
+                                        Не заблоковано
+                                    {% else %}
+                                        Заблоковано
+                                    {% endif %}
+                                </div>
+                                {% if not user.banstatus.is_banned %}
+                                    <form action="/ban-user/{{ user.id }}/" method="POST">
+                                        {% csrf_token %}
+                                        <button type="submit" class="review-order" id="ban-button">Забанити</button>
+                                    </form>
+                                {% else %}
+                                    <form action="/unban-user/{{ user.id }}/" method="POST">
+                                      {% csrf_token %}
+                                        <button type="submit" class="review-order" id="unban-button">Розбанити</button>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+{% else %}
+    <div class="container">
+        <h1>
+            Нема користувачів
+        </h1>
+    </div>
+
+{% endif %}
+
+    <script>
+        var itemCount = {{ users|length }};
+        var cartForm = document.getElementById("cart-form");
+        var cartContainer = document.getElementById("cart-container");
+        var heightForm = 600 + (itemCount - 4) * 110;
+        var heightContainer = 1100 + (itemCount - 4) * 110;
+        cartForm.style.height = heightForm + "px";
+        cartContainer.style.height = heightContainer + "px";
+    </script>
+
+
+
+
+{% endblock %}

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'Account.apps.AccountConfig',
     'User.apps.UserConfig',
     'Order.apps.OrderConfig',
+    'Administrator.apps.AdministratorConfig',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"

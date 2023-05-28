@@ -463,7 +463,7 @@ hr {
 }
 
 .poster-main-info .container .event-upper a .fa-heart {
-  /*resize: ;*/
+  font-size: 3em;
 }
 
 .poster-main-info .container h1 .user-name {
@@ -546,6 +546,12 @@ hr {
   border-bottom: 10px solid rgba(158, 123, 155, 0.75);
   text-decoration: underline;
   transition: 0.3s all;
+}
+.not-allowed{
+  height: 300px;
+}
+.not-allowed h1 {
+  width: 100%;
 }
 .contacts-info {
   height: 1150px;

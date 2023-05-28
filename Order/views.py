@@ -18,6 +18,7 @@ def cart(request):
         items = order.orderitem_set.all()
     else:
         cookieData = cookieCard(request)
+        # print(cookieData)
         order = cookieData['order']
         items = cookieData['items']
     return render(request, "cart.html", {'items': items, 'order': order})
@@ -47,14 +48,15 @@ def submit(request):
 def updateItem(request):
     data = json.loads(request.body)
     eventId = data['eventId']
+    eventDate = data['eventDate']
     action = data['action']
 
     customer = request.user.customer
     order, created = Order.objects.get_or_create(customer=customer, complete=False)
 
-    if eventId:
+    if eventId and eventDate:
         event = Event.objects.get(id=eventId)
-        orderItem, created = OrderItem.objects.get_or_create(order=order, event=event)
+        orderItem, created = OrderItem.objects.get_or_create(order=order, event=event, date_event=eventDate)
 
         if action == 'add':
             orderItem.quantity = (orderItem.quantity + 1)
@@ -112,6 +114,7 @@ def procesOrder(request):
                 event=event,
                 order=order,
                 quantity=item['quantity'],
+                date_event=item['date_event'],
             )
 
     total = float(data['card']['total'])

@@ -5,14 +5,19 @@ document.addEventListener('DOMContentLoaded', function() {
     for(let i = 0; i < updateButton.length; i ++) {
         updateButton[i].addEventListener('click', function(){
             let eventId = this.dataset.event;
+            let eventDate = this.dataset.event_date;
+
+           console.log("eventDate")
+           console.log(eventDate)
+
             let action = this.dataset.action;
-            console.log('eventId:', eventId, 'action:', action)
+            console.log('eventId:', eventId, 'eventDate:', eventDate, 'action:', action)
 
             console.log('USER:', user)
             if(user === 'AnonymousUser'){
-                addCookieItem(eventId, action)
+                addCookieItem(eventId, eventDate, action)
             } else {
-                updateUserOrder(eventId, action)
+                updateUserOrder(eventId, eventDate, action)
             }
 
         })
@@ -20,29 +25,35 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-function addCookieItem(eventId, action){
+function addCookieItem(eventId, eventDate, action){
     console.log("User is not authenticating")
 
-    if (action === 'add'){
-        if(cart[eventId] === undefined) {
-            cart[eventId] = {'quantity': 1}
+
+    if (action === 'add') {
+        if (cart[eventId] === undefined) {
+            cart[eventId] = {};
+        }
+
+        if (cart[eventId][eventDate] === undefined) {
+            cart[eventId][eventDate] = {'quantity': 1};
         } else {
-            cart[eventId]['quantity'] += 1
+            cart[eventId][eventDate]['quantity'] += 1;
         }
     }
 
-    if (action === 'remove'){
-        cart[eventId]['quantity'] -= 1
 
-        if(cart[eventId]['quantity'] <=0) {
+    if (action === 'remove') {
+        cart[eventId][eventDate]['quantity'] -= 1
+
+        if(cart[eventId][eventDate]['quantity'] <=0) {
             console.log('Remove item')
-            delete cart[eventId]
+            delete cart[eventId][eventDate]
         }
     }
 
     if (action === 'delete-item'){
         console.log('Remove item')
-        delete cart[eventId]
+        delete cart[eventId][eventDate]
 
     }
 
@@ -54,7 +65,7 @@ function addCookieItem(eventId, action){
     location.reload()
 }
 
-function updateUserOrder(eventId, action) {
+function updateUserOrder(eventId, eventDate, action) {
     console.log('User is logged in, sending data..')
 
     let url = '/update_item/';
@@ -67,7 +78,8 @@ function updateUserOrder(eventId, action) {
         },
         body: JSON.stringify({
             'eventId': eventId,
-            'action': action
+            'eventDate': eventDate,
+            'action': action,
         })
     })
 

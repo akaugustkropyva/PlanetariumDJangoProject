@@ -409,7 +409,7 @@ hr {
   margin: 0;
   font-size: 30px;
 }
-.poster button {
+.poster a {
   background-color: #FFD561;
   color: #311847;
   font-family: Podkova, serif;
@@ -423,7 +423,7 @@ hr {
   width: 250px;
   height: 60px;
 }
-.poster button:hover {
+.poster a:hover {
   border-bottom: 10px solid rgba(158, 123, 155, 0.75);
   text-decoration: underline;
   transition: 0.3s all;
@@ -497,11 +497,22 @@ hr {
   margin-top: 30px;
   margin-left: 60px;
 }
+
+.poster-main-info .container .row .col-lg-6 .full-poster-info input {
+  width: 500px;
+  height: 50px;
+  font-family: Podkova, serif;
+  font-size: 22px;
+  margin-top: 15px;
+  border-radius: 5px;
+}
+
 .poster-main-info .container .row .col-lg-6 .full-poster-info .written-info {
   display: flex;
   align-items: center;
   width: 100%;
 }
+
 .poster-main-info .container .row .col-lg-6 .full-poster-info .written-info img {
   width: 70px;
   height: 70px;
@@ -511,6 +522,12 @@ hr {
   font-size: 30px;
   margin-left: 30px;
 }
+
+.poster-main-info .container .row .col-lg-6 .full-poster-info .written-info label {
+  color: white;
+  font-size: 30px;
+}
+
 .poster-main-info .container .row .col-lg-6 .full-poster-info .written-info .price {
   display: flex;
   align-items: center;
@@ -522,11 +539,12 @@ hr {
   margin-left: 30px;
   font-size: 36px;
 }
+
 .poster-main-info .container .row .col-lg-6 .button {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 100px;
+  margin-top: 75px;
 }
 .poster-main-info .container .row .col-lg-6 .button button {
   display: flex;
@@ -552,6 +570,10 @@ hr {
 }
 .not-allowed h1 {
   width: 100%;
+}
+
+.poster-main-info .container .row .col-lg-6 .hidden{
+  display: none;
 }
 .contacts-info {
   height: 1150px;
@@ -940,7 +962,7 @@ hr {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 130px;
+  width: 120px;
   height: 100%;
   font-size: 24px;
   color: white;
@@ -1017,11 +1039,11 @@ hr {
 
 
 .cart .block .spacing .products-params .item-param-name {
-  width: 400px;
+  width: 325px;
 }
 
 .cart .block .spacing .products-params .item-value-price {
-  width: 200px;
+  width: 150px;
 }
 
 .additional-info-block-info-page {

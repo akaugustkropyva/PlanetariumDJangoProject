@@ -36,6 +36,9 @@
                                 Назва
                         </div>
                         <div class="item-param item-value-price">
+                                Дата
+                        </div>
+                        <div class="item-param item-value-price">
                                 Ціна
                         </div>
                         <div class="item-param">
@@ -56,6 +59,9 @@
                             </div>
                             <div class="item-param item-param-name">
                                     {{ item.event.name }}
+                            </div>
+                            <div class="item-param item-value-price">
+                                     {{ item.date_event|date:"Y-m-d" }}
                             </div>
                             <div class="item-param item-value-price">
                                     {{ item.event.price }} грн.

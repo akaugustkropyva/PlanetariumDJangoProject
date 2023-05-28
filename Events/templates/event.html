@@ -25,14 +25,16 @@
                 <h1>
                     {{ event.name }}
                 </h1>
-                {% if is_favourite %}
-                    <a href="{% url 'events:favourite_event' event.id %}">
-                        <i class="fa-solid fa-heart fa-lg" style="color: #ffffff;"></i>
-                    </a>
-                {% else %}
-                    <a href="{% url 'events:favourite_event' event.id %}">
-                        <i class="fa-regular fa-heart fa-lg" style="color: #ffffff;"></i>
-                    </a>
+                {% if user.is_authenticated %}
+                    {% if is_favourite %}
+                        <a href="{% url 'events:favourite_event' event.id %}">
+                            <i class="fa-solid fa-heart fa-lg" style="color: #ffffff;"></i>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'events:favourite_event' event.id %}">
+                            <i class="fa-regular fa-heart fa-lg" style="color: #ffffff;"></i>
+                        </a>
+                    {% endif %}
                 {% endif %}
             </div>
             <hr>
@@ -46,8 +48,8 @@
                     <div class="full-poster-info">
                         <div class="written-info">
                             <img src="/media/images/poster/calendar.png" alt="">
-                            <p>Дата проведення:&nbsp <br> Від {{ event.from_date|date:"m-d" }} -
-                                До {{ event.to_date|date:"m-d" }}</p>
+                            <p>Дата проведення:&nbsp <br> Від {{ event.from_date|date:"d-m-Y" }} -
+                                До {{ event.to_date|date:"d-m-Y" }}</p>
                         </div>
                         <div class="written-info">
                             <img src="/media/images/poster/theater.png" alt="">
@@ -62,11 +64,27 @@
                             <p>Ціна:</p>
                             <p class="price">{{ event.price }} ГРН.</p>
                         </div>
-                    </div>
+
                     {% if not user.is_superuser %}
-                        <div class="button">
-                            <button data-event="{{ event.id }}" data-action="add" class="update-cart">Додати у кошик</button>
+                        <div id="error-message" style="color: white;"></div>
+
+                        <div class="written-info">
+                            <label for="event-date-input">
+                                     Оберіть дату на яку хочете придбати квиток
+                            </label>
                         </div>
+
+                        <input name="event_date" type="date" class="input submit-input part-input-date" id="event-date-input" placeholder="Date">
+
+
+                    </div>
+
+                    <div class="button">
+                        <button id="form-button" data-event="{{ event.id }}" data-event_date="" data-action="add">Придбати квиток</button>
+                    </div>
+                    <div class="button hidden">
+                        <button data-event="{{ event.id }}" data-event_date="" data-action="add" class="update-cart"></button>
+                    </div>
                     {% endif %}
                 </div>
             </div>
@@ -86,13 +104,8 @@
                     </p>
                 </div>
             </div>
-            <div class="form">
-                <button data-event="{{ event.id }}" data-action="add" class="update-cart">Додати у кошик</button>
-            </div>
         </div>
     </section>
-
-    <div onclick="show('none')" id="bg-form" class="bg-gray"></div>
 
 
 {% else %}
@@ -102,5 +115,42 @@
         </h1>
     </div>
 {% endif %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var formButton = document.getElementById('form-button');
+    var eventDateInput = document.getElementById('event-date-input');
+    var updateCartButton = document.querySelector('.update-cart');
+    var fromDateString = '{{ event.from_date|date:"Y-m-d" }}';
+    var toDateString = '{{ event.to_date|date:"Y-m-d" }}';
+    var fromDate = new Date(fromDateString);
+    var toDate = new Date(toDateString);
+    var errorMessage = document.getElementById('error-message');
+
+    formButton.addEventListener('click', function(event) {
+      event.preventDefault();
+      errorMessage.textContent = '';
+
+      var eventDate = eventDateInput.value;
+
+      if (!eventDate) {
+        errorMessage.textContent = 'Ви не обрали дату';
+        return NaN;
+      }
+
+      var selectedDate = new Date(eventDate);
+
+      if (selectedDate < fromDate || selectedDate > toDate) {
+        errorMessage.textContent = 'На цей день квитків немає';
+        return NaN;
+      }
+      else {
+          updateCartButton.dataset.event_date = eventDateInput.value;
+          updateCartButton.click();
+      }
+
+    });
+  });
+</script>
 
 {% endblock %}

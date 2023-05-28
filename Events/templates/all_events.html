@@ -84,18 +84,19 @@
                             <div class="calendar">
                                 <img src="/media/images/poster/calendar.png" alt="">
                                 <div class="text">
-                                    <p>Від {{ event.from_date|date:"m-d" }} </p>
-                                    <p>До {{ event.to_date|date:"m-d" }}</p>
+                                    <p>Від {{ event.from_date|date:"d-m" }} </p>
+                                    <p>До {{ event.to_date|date:"d-m" }}</p>
                                 </div>
                             </div>
                             <hr class="poster-hr">
                             <p class="price">{{ event.price }} ГРН.</p>
                             {% if not user.is_superuser %}
-                                <button data-event="{{ event.id }}" data-action="add" class="update-cart">Додати у кошик</button>
+                                <a href="{% url 'events:event' event.id %}">Переглянути</a>
                             {% endif %}
                         </div>
                     </div>
                 {% endfor %}
+
 
             {% else %}
                 <h1>

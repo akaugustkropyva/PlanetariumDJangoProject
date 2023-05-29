@@ -28,11 +28,11 @@ def all_events(request):
     if sorting:
         events = events.order_by(sorting)
 
-    paginator = Paginator(events, 2)
+    paginator = Paginator(events, 4)
 
     page_number = request.GET.get('page')
-    events = paginator.get_page(page_number)
-    return render(request, "all_events.html", context={'events': events})
+    paginator_events = paginator.get_page(page_number)
+    return render(request, "all_events.html", context={'events': paginator_events})
 
 
 def event(request, parameter):

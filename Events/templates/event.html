@@ -65,6 +65,8 @@
                             <p class="price">{{ event.price }} ГРН.</p>
                         </div>
 
+                    <a href="{% url 'administrator:event_change' event.id %}">Змінити</a>
+
                     {% if not user.is_superuser %}
                         <div id="error-message" style="color: white;"></div>
 

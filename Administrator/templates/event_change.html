@@ -19,19 +19,31 @@
         </div>
     </section>
 
-    <section class="poster-main-info">
+    <section class="poster-main-info edit-profile-page">
         <div class="container">
-            <div class="event-upper">
-                <h1>
-                    {{ event.name }}
-                </h1>
-            </div>
+            {% for message in messages %}
+                <h1> {{ message }}</h1>
+            {% endfor %}
+            <h1>
+               {{ event.name }}
+            </h1>
             <hr>
+            {% for field_errors in form.errors.values %}
+                {% for error in field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
             <div class="row">
-                <section class="posters-block posters-block-register">
+                <div class="col-12 col-lg-6">
+                    <div class="block">
+                        <img src="{{ event.image.url }}" alt="">
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <section class="posters-block posters-block-register">
                         <div class="container">
                             <div class="sub-container">
-                                <div class="registration event-change">
+                                <div class="registration edit-profile-form">
                                     <form name="form" method="POST" enctype="multipart/form-data">
                                         <h2>| Введіть дані |</h2>
 
@@ -56,9 +68,51 @@
 
                         </div>
                     </section>
+                </div>
             </div>
         </div>
     </section>
+
+{#    <section class="poster-main-info">#}
+{#        <div class="container">#}
+{#            <div class="event-upper">#}
+{#                <h1>#}
+{#                    {{ event.name }}#}
+{#                </h1>#}
+{#            </div>#}
+{#            <hr>#}
+{#            <div class="row">#}
+{#                <section class="posters-block posters-block-register">#}
+{#                        <div class="container">#}
+{#                            <div class="sub-container">#}
+{#                                <div class="registration event-change">#}
+{#                                    <form name="form" method="POST" enctype="multipart/form-data">#}
+{#                                        <h2>| Введіть дані |</h2>#}
+{##}
+{#                                            {% csrf_token %}#}
+                                        {#    {{ form.as_p }}#}
+{##}
+{#                                            {{ form.name }}#}
+{#                                            {{ form.short_name }}#}
+{#                                            {{ form.image }}#}
+{#                                            {{ form.from_date }}#}
+{#                                            {{ form.to_date }}#}
+{#                                            {{ form.price }}#}
+{#                                            {{ form.about }}#}
+{#                                            {{ form.hall_id }}#}
+{#                                            {{ form.popularity }}#}
+{##}
+{#                                        <button type="submit"> Змінити </button>#}
+{#                                        <a class="additional-buttom" href="{% url 'events:event' event.id %}"> Повернутися </a>#}
+{#                                    </form>#}
+{#                                </div>#}
+{#                            </div>#}
+{##}
+{#                        </div>#}
+{#                    </section>#}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
 
 
 

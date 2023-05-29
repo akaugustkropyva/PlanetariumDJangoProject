@@ -36,7 +36,7 @@
                             </div>
                             <hr class="poster-hr">
                             <p class="price">{{ event.price }} ГРН.</p>
-                            <button data-event="{{ event.id }}" data-action="add" class="update-cart">Додати у кошик</button>
+                            <a href="{% url 'events:event' event.id %}">Переглянути</a>
                         </div>
                     </div>
                 {% endfor %}
@@ -48,6 +48,27 @@
                 </h1>
             {% endif %}
         </div>
+    <div class="pagination-form">
+                  <ul class="pagination">
+                        {% if events.has_previous %}
+                            <li class="page-item">
+                                <a href="?page=1">&laquo;</a>
+                                <a href="?page={{ events.previous_page_number }}" rel="prev" aria-label="&laquo; Previous">&lsaquo;</a>
+                            </li>
+                        {% endif %}
+                        <div class="current">
+                            <p class="current-page">{{ events.number }}</p>
+                            <p>/</p>
+                            <p>{{ events.paginator.num_pages }}</p>
+                        </div>
+                        {% if events.has_next %}
+                            <li class="page-item">
+                                <a href="?page={{ events.next_page_number }}" rel="next" aria-label="Next &raquo;">&rsaquo;</a>
+                                <a href="?page={{ events.paginator.num_pages }}">&raquo;</a>
+                            </li>
+                        {% endif %}
+                  </ul>
+            </div>
     </div>
 </section>
 

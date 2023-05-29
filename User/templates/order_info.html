@@ -58,7 +58,7 @@
                                 <img src="{{ item.event.image.url }}" alt="">
                             </div>
                             <div class="item-param item-param-name">
-                                    {{ item.event.name }}
+                                    <a class="order-event" href="{% url 'events:event' item.event.id %}">{{ item.event.name }}</a>
                             </div>
                             <div class="item-param item-value-price">
                                      {{ item.date_event|date:"Y-m-d" }}

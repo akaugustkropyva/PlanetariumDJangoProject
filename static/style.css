@@ -478,6 +478,34 @@ hr {
 .poster-main-info .container .row {
   margin-top: 100px;
 }
+
+.poster-main-info .container .row .col-lg-6 .admin-event-change{
+  background-color: #FFD561;
+  color: #311847;
+  font-family: Podkova, serif;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  border-radius: 50px;
+  width: 90%;
+  height: 80px;
+}
+.poster-main-info .container .row .col-lg-6 .admin-event-change:hover {
+  border-bottom: 10px solid rgba(158, 123, 155, 0.75);
+  text-decoration: underline;
+  transition: 0.3s all;
+}
+.poster-main-info .container .row .col-lg-6 .date-errors{
+  text-align: center;
+  color: black;
+  font-size: 30px;
+  background-color: #311847;
+  width: 85%;
+  border-radius: 50px;
+}
+
 .poster-main-info .container .row .col-lg-6 .block {
   display: flex;
   align-items: center;
@@ -655,6 +683,9 @@ hr {
   color: white;
   background: #311847;
   border-radius: 15px;
+}
+.posters-block .sub-container .edit-profile-form {
+  height: 900px;
 }
 .posters-block .sub-container .event-change {
   height: 900px;
@@ -957,7 +988,9 @@ hr {
   text-decoration: underline;
   transition: 0.3s all;
 }
-
+.cart .block .spacing .products-values .user-ban {
+  margin-bottom: 45px;
+}
 .cart .block .spacing .products-params .item-param {
   display: flex;
   align-items: center;
@@ -967,7 +1000,13 @@ hr {
   font-size: 24px;
   color: white;
 }
-
+.cart .block .spacing .products-params .item-param .order-event{
+  color: white;
+  text-decoration: none;
+}
+.cart .block .spacing .products-params .item-param .order-event:hover{
+  text-decoration: underline;
+}
 .cart .block .spacing .products-params .item-param .update-cart {
   background-color: transparent;
   border: white solid 2px;

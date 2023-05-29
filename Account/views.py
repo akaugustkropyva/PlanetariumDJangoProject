@@ -1,6 +1,5 @@
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from User.models import Customer
 from Administrator.models import BanStatus
 from .forms import RegisterForm, LoginForm
@@ -23,9 +22,13 @@ def register(request):
                 user = User.objects.create_user(username=username, email=email, password=password)
                 customer.user = user
                 customer.save()
+                group = Group.objects.get(name='customer')
+                user.groups.add(group)
                 BanStatus.objects.create(user=user)
             except Customer.DoesNotExist:
                 user = form.save()
+                group = Group.objects.get(name='customer')
+                user.groups.add(group)
                 Customer.objects.create(user=user, name=form.cleaned_data.get("username"),
                                         email=form.cleaned_data.get("email"))
                 BanStatus.objects.create(user=user)

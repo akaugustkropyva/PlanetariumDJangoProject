@@ -45,6 +45,7 @@ def submit(request):
     return render(request, "submit.html", {'order': order, 'form': form, 'form_validated': form_validated})
 
 
+@allowed_users(allowed_roles=['customer'])
 def updateItem(request):
     data = json.loads(request.body)
     eventId = data['eventId']
@@ -76,6 +77,7 @@ def updateItem(request):
     return JsonResponse('Cart was changed', safe=False)
 
 
+@allowed_users(allowed_roles=['customer'])
 def procesOrder(request):
     # print(request.body)
     transaction_id = datetime.datetime.now().timestamp()

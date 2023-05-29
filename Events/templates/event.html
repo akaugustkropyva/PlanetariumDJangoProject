@@ -25,7 +25,7 @@
                 <h1>
                     {{ event.name }}
                 </h1>
-                {% if user.is_authenticated %}
+                {% if user.is_authenticated and not user.is_superuser %}
                     {% if is_favourite %}
                         <a href="{% url 'events:favourite_event' event.id %}">
                             <i class="fa-solid fa-heart fa-lg" style="color: #ffffff;"></i>
@@ -64,30 +64,25 @@
                             <p>Ціна:</p>
                             <p class="price">{{ event.price }} ГРН.</p>
                         </div>
-
-                    <a href="{% url 'administrator:event_change' event.id %}">Змінити</a>
-
-                    {% if not user.is_superuser %}
-                        <div id="error-message" style="color: white;"></div>
-
-                        <div class="written-info">
-                            <label for="event-date-input">
-                                     Оберіть дату на яку хочете придбати квиток
-                            </label>
+                        {% if user.is_superuser %}
+                            <a class="admin-event-change" href="{% url 'administrator:event_change' event.id %}">Змінити</a>
+                        {% endif %}
+                        {% if not user.is_superuser %}
+                            <div class="date-errors" id="error-message" style="color: white;"></div>
+                            <div class="written-info">
+                                <label for="event-date-input">
+                                         Оберіть дату на яку хочете придбати квиток
+                                </label>
+                            </div>
+                            <input name="event_date" type="date" class="input submit-input part-input-date" id="event-date-input" placeholder="Date">
                         </div>
-
-                        <input name="event_date" type="date" class="input submit-input part-input-date" id="event-date-input" placeholder="Date">
-
-
-                    </div>
-
-                    <div class="button">
-                        <button id="form-button" data-event="{{ event.id }}" data-event_date="" data-action="add">Придбати квиток</button>
-                    </div>
-                    <div class="button hidden">
-                        <button data-event="{{ event.id }}" data-event_date="" data-action="add" class="update-cart"></button>
-                    </div>
-                    {% endif %}
+                        <div class="button">
+                            <button id="form-button" data-event="{{ event.id }}" data-event_date="" data-action="add">Придбати квиток</button>
+                        </div>
+                        <div class="button hidden">
+                            <button data-event="{{ event.id }}" data-event_date="" data-action="add" class="update-cart"></button>
+                        </div>
+                        {% endif %}
                 </div>
             </div>
         </div>

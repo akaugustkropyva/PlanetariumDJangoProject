@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'crispy_bootstrap5',
+    'Events.templatetags.custom_filters',
     'Main.apps.MainConfig',
     'Events.apps.EventsConfig',
     'News.apps.NewsConfig',

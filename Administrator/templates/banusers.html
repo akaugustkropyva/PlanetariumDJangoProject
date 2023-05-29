@@ -30,10 +30,10 @@
                         </div>
                         <div class="item-param item-value-price">
                         </div>
-                        <div class="item-param item-value-price">
+                        <div class="item-param item-param-name">
                             Статус
                         </div>
-                        <div class="item-param item-value-price">
+                        <div class="item-param item-param-name">
                         </div>
                     </div>
                     <hr>
@@ -43,26 +43,28 @@
                                 <div class="item-param item-param-name">
                                         {{ user.username }}
                                 </div>
-                                <div class="item-param item-value-price">
+                                <div class="item-param">
                                 </div>
-                                <div class="item-param item-value-price">
+                                <div class="item-param item-param-name">
                                     {% if user.banstatus.is_banned == False %}
                                         Не заблоковано
                                     {% else %}
                                         Заблоковано
                                     {% endif %}
                                 </div>
+                                <div class="item-param item-param-name">
                                 {% if not user.banstatus.is_banned %}
                                     <form action="/ban-user/{{ user.id }}/" method="POST">
                                         {% csrf_token %}
-                                        <button type="submit" class="review-order" id="ban-button">Забанити</button>
+                                        <button type="submit" class="review-order user-ban" id="ban-button">Забанити</button>
                                     </form>
                                 {% else %}
                                     <form action="/unban-user/{{ user.id }}/" method="POST">
                                       {% csrf_token %}
-                                        <button type="submit" class="review-order" id="unban-button">Розбанити</button>
+                                        <button type="submit" class="review-order user-ban" id="unban-button">Розбанити</button>
                                     </form>
                                 {% endif %}
+                                </div>
                             </div>
                         {% endif %}
                     {% endfor %}

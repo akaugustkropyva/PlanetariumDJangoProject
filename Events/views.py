@@ -1,7 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .models import Event
 from django.db.models import Q
 from django.core.paginator import Paginator
+from Administrator.decorators import allowed_users
 
 
 def all_events(request):
@@ -43,7 +45,8 @@ def event(request, parameter):
     return render(request, "event.html", context={'event': event, "is_favourite": is_favourite})
 
 
-
+@allowed_users(allowed_roles=['customer'])
+@login_required(login_url='account:login')
 def favourite_event(request, parameter):
     event = Event.objects.get(id=parameter)
     if event.favourite.filter(id=request.user.id).exists():

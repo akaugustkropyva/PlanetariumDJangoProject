@@ -91,9 +91,7 @@
                             </div>
                             <hr class="poster-hr">
                             <p class="price">{{ event.price }} ГРН.</p>
-                            {% if not user.is_superuser %}
-                                <a href="{% url 'events:event' event.id %}">Переглянути</a>
-                            {% endif %}
+                            <a href="{% url 'events:event' event.id %}">Переглянути</a>
                         </div>
                     </div>
                 {% endfor %}

@@ -19,7 +19,7 @@ def ban_user(request, user_id):
     user = get_object_or_404(User, id=user_id)
     user.banstatus.is_banned = True
     user.banstatus.save()
-    return redirect("administrator:banusers")  # Replace "user_list" with the URL name of the user list page
+    return redirect('administrator:banusers')
 
 
 @admin_only
@@ -27,7 +27,7 @@ def unban_user(request, user_id):
     user = get_object_or_404(User, id=user_id)
     user.banstatus.is_banned = False
     user.banstatus.save()
-    return redirect("administrator:banusers")  # Replace "user_list" with the URL name of the user list page
+    return redirect('administrator:banusers')
 
 
 @admin_only

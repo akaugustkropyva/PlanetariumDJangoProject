@@ -43,6 +43,7 @@ def event(request, parameter):
     return render(request, "event.html", context={'event': event, "is_favourite": is_favourite})
 
 
+
 def favourite_event(request, parameter):
     event = Event.objects.get(id=parameter)
     if event.favourite.filter(id=request.user.id).exists():

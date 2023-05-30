@@ -3,7 +3,7 @@ from django.db import models
 
 class Proposal(models.Model):
     name = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='images/proposals/')
+    image = models.ImageField(upload_to='images/proposals/', blank=True)
 
     def __str__(self):
         return f"{self.name}"

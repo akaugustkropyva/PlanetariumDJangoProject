@@ -43,22 +43,37 @@
                     <section class="posters-block posters-block-register">
                         <div class="container">
                             <div class="sub-container">
-                                <div class="registration edit-profile-form">
+                                <div class="registration edit-profile-form change-event-form">
                                     <form name="form" method="POST" enctype="multipart/form-data">
                                         <h2>| Введіть дані |</h2>
 
                                             {% csrf_token %}
                                         {#    {{ form.as_p }}#}
-
+                                        <label class="edit-parameter event-change-labels" for="id_name">Назва:</label>
                                             {{ form.name }}
+                                        <label class="edit-parameter event-change-labels" for="id_short_name">Коротка назва:</label>
                                             {{ form.short_name }}
+                                        <label class="edit-parameter event-change-labels" for="id_image">Постер:</label>
                                             {{ form.image }}
+                                        <div class="label-input dates">
+                                            <label class="edit-parameter event-change-labels" for="id_from_date">Від:</label>
                                             {{ form.from_date }}
+                                        </div>
+                                        <div class="label-input dates">
+                                            <label class="edit-parameter event-change-labels" for="id_to_date">До:</label>
                                             {{ form.to_date }}
+                                        </div>
+                                        <label class="edit-parameter event-change-labels" for="id_price">Ціна:</label>
                                             {{ form.price }}
+                                        <label class="edit-parameter event-change-labels" for="id_about">Опис події:</label>
                                             {{ form.about }}
+                                        <label class="edit-parameter event-change-labels" for="id_hall_id">Зала:</label>
                                             {{ form.hall_id }}
+                                        <div class="label-input dates">
+                                            <label class="edit-parameter event-change-labels" for="id_popularity">Популярність:</label>
                                             {{ form.popularity }}
+                                        </div>
+
 
                                         <button type="submit"> Змінити </button>
                                         <a class="additional-buttom" href="{% url 'events:event' event.id %}"> Повернутися </a>
@@ -72,6 +87,30 @@
             </div>
         </div>
     </section>
+
+    <script>
+		var form_fields = document.getElementsByTagName('input')
+
+		for (var field in form_fields){
+			form_fields[field].className += 'change-input'
+		}
+
+        form_fields[4].setAttribute('type', 'date');
+        form_fields[5].setAttribute('type', 'date');
+        form_fields[7].className += ' about-block-change'
+
+        var form_field_select = document.getElementsByTagName('select')[0]
+        form_field_select.className += 'change-input '
+
+        var formfield_text = document.getElementsByTagName('textarea')[0]
+        formfield_text.className += 'change-input text-area-change'
+
+    </script>
+
+    <script>
+
+    </script>
+
 
 {#    <section class="poster-main-info">#}
 {#        <div class="container">#}

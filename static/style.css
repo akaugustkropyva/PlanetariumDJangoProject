@@ -687,6 +687,9 @@ hr {
 .posters-block .sub-container .edit-profile-form {
   height: 900px;
 }
+.posters-block .sub-container .change-event-form {
+  height: 1050px;
+}
 .posters-block .sub-container .event-change {
   height: 900px;
 }
@@ -783,8 +786,6 @@ hr {
   font-size: 22px;
   margin-top: 30px;
 }
-
-
 .posters-block-register {
   height: 950px;
 }
@@ -919,7 +920,35 @@ hr {
   text-decoration: underline;
   transition: 0.3s all;
 }
-
+.edit-profile-page .sub-container .edit-profile-form form .event-change-labels {
+  margin-top: 10px;
+  /*background-color: #20c997;*/
+}
+.edit-profile-page .sub-container .edit-profile-form form .change-input {
+  width: 60%;
+  height: 30px;
+  font-size: 24px;
+  font-family: Podkova, serif;
+}
+.edit-profile-page .sub-container .edit-profile-form form .text-area-change{
+  height: 150px;
+}
+.edit-profile-page .sub-container .edit-profile-form form .about-block-change {
+  width: 20%;
+  font-family: Podkova, serif;
+  font-size: 24px;
+}
+.edit-profile-page .sub-container .edit-profile-form form .bigger-div{
+  width: 50px;
+}
+.edit-profile-page .sub-container .edit-profile-form form .label-input {
+  display: flex;
+  justify-content: space-evenly;
+  width: 40%;
+}
+.edit-profile-page .sub-container .edit-profile-form form .dates{
+  margin-top: 10px;
+}
 .cart .history-order-h {
   height: 120px;
 }

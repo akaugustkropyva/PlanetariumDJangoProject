@@ -54,6 +54,6 @@ Project is:  _complete_.
 
 
 ## Acknowledgements
-This project came to life thanks to.
+This project came to life thanks to:
 - [Yuliia](https://github.com/JuliManhupli).
 - [Anne](https://github.com/akaugustkropyva).

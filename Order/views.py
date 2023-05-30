@@ -4,13 +4,11 @@ from Events.models import Event
 from Order.models import Order, OrderItem
 from .forms import OrderForm
 from User.models import Customer
-from Administrator.decorators import allowed_users
 from .utils import cookieCard
 import json
 import datetime
 
 
-@allowed_users(allowed_roles=['customer'])
 def cart(request):
     if request.user.is_authenticated:
         customer = request.user.customer
@@ -24,7 +22,6 @@ def cart(request):
     return render(request, "cart.html", {'items': items, 'order': order})
 
 
-@allowed_users(allowed_roles=['customer'])
 def submit(request):
     form_validated = False
     customer = None
@@ -45,7 +42,6 @@ def submit(request):
     return render(request, "submit.html", {'order': order, 'form': form, 'form_validated': form_validated})
 
 
-@allowed_users(allowed_roles=['customer'])
 def updateItem(request):
     data = json.loads(request.body)
     eventId = data['eventId']
@@ -77,7 +73,6 @@ def updateItem(request):
     return JsonResponse('Cart was changed', safe=False)
 
 
-@allowed_users(allowed_roles=['customer'])
 def procesOrder(request):
     # print(request.body)
     transaction_id = datetime.datetime.now().timestamp()

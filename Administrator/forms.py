@@ -3,6 +3,8 @@ from django import forms
 
 
 class EventForm(forms.ModelForm):
+    image = forms.ImageField(required=True)
+
     class Meta:
         model = Event
         fields = '__all__'

@@ -40,8 +40,25 @@ def event_change(request, parameter):
     else:
         form = EventForm(instance=event)
 
-    return render(request, "event_change.html", {"form": form, "event": event})
+    return render(request, "event_form.html", {"form": form, "event": event})
 
+
+@admin_only
+def event_delete(request, parameter):
+    event = Event.objects.get(id=parameter)
+    event.delete()
+    return redirect('events:all_events')
+
+@admin_only
+def event_create(request):
+    if request.method == 'POST':
+        form = EventForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('events:all_events')  # Redirect to a view displaying the list of events
+    else:
+        form = EventForm()
+    return render(request, 'event_form.html', {'form': form})
 
 def notallowed(request):
     return render(request, 'notallowed.html')

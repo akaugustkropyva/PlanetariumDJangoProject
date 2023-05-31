@@ -66,6 +66,8 @@
                         </div>
                         {% if user.is_superuser %}
                             <a class="admin-event-change" href="{% url 'administrator:event_change' event.id %}">Змінити</a>
+                            <p></p>
+                            <a class="admin-event-change" href="{% url 'administrator:even_delete' event.id %}">Видалити</a>
                         {% endif %}
                         {% if not user.is_superuser %}
                             <div class="date-errors" id="error-message" style="color: white;"></div>

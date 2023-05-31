@@ -30,7 +30,7 @@ def all_events(request):
     if sorting:
         events = events.order_by(sorting)
 
-    paginator = Paginator(events, 4)
+    paginator = Paginator(events, 8)
 
     page_number = request.GET.get('page')
     paginator_events = paginator.get_page(page_number)

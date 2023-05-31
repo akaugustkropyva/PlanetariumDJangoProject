@@ -21,6 +21,12 @@
             <h1>
                 Афіша подій
             </h1>
+            {% if user.is_superuser %}
+                <h1>
+                    <a href="{% url 'administrator:event_create' %}">Додати подію</a>
+                </h1>
+            {% endif %}
+
             <hr>
             <form class="search-form"  method="GET" action="{% url 'events:all_events' %}">
                 <div class="row">

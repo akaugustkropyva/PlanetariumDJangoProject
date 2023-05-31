@@ -18,15 +18,14 @@
 
 <section class="choice-maker">
         <div class="container">
-            <h1>
-                Афіша подій
-            </h1>
-            {% if user.is_superuser %}
+            <div class="admin-events">
                 <h1>
-                    <a href="{% url 'administrator:event_create' %}">Додати подію</a>
+                    Афіша подій
                 </h1>
-            {% endif %}
-
+                {% if user.is_superuser %}
+                    <a href="{% url 'administrator:event_create' %}">Додати подію</a>
+                {% endif %}
+            </div>
             <hr>
             <form class="search-form"  method="GET" action="{% url 'events:all_events' %}">
                 <div class="row">

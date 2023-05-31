@@ -1,7 +1,5 @@
 from django.test import TestCase
 from Main.models import Proposal, Info
-from django.conf import settings
-from django.core.files.uploadedfile import SimpleUploadedFile
 
 
 class ProposalModelTest(TestCase):

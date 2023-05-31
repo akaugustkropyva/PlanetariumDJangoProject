@@ -12,10 +12,12 @@
             <a href="{% url 'main:landing' %}">На головну</a>
             <p>&nbsp|&nbsp</p>
             <a href="{% url 'events:all_events' %}">Афіша</a>
-            <p class="full-name">&nbsp|&nbsp</p>
-            <a class="full-name" href="{% url 'events:event' event.id %}">{{ event.name }}</a>
-            <p class="short-name">&nbsp|&nbsp</p>
-            <a class="short-name" href="">{{ event.short_name }}</a>
+            {% if event %}
+                <p class="full-name">&nbsp|&nbsp</p>
+                <a class="full-name" href="{% url 'events:event' event.id %}">{{ event.name }}</a>
+                <p class="short-name">&nbsp|&nbsp</p>
+                <a class="short-name" href="">{{ event.short_name }}</a>
+            {% endif %}
         </div>
     </section>
 
@@ -25,7 +27,11 @@
                 <h1> {{ message }}</h1>
             {% endfor %}
             <h1>
-               {{ event.name }}
+                {% if event %}
+                    {{ event.name }}
+                {% else %}
+                    Нова подія
+                {% endif %}
             </h1>
             <hr>
             {% for field_errors in form.errors.values %}
@@ -36,7 +42,11 @@
             <div class="row">
                 <div class="col-12 col-lg-6">
                     <div class="block">
-                        <img src="{{ event.image.url }}" alt="">
+                        {% if event %}
+                            <img src="{{ event.image.url }}" alt="">
+                        {% else %}
+                            <img src="/media/images/default.png" alt="">
+                        {% endif %}
                     </div>
                 </div>
                 <div class="col-12 col-lg-6">
@@ -46,9 +56,7 @@
                                 <div class="registration edit-profile-form change-event-form">
                                     <form name="form" method="POST" enctype="multipart/form-data">
                                         <h2>| Введіть дані |</h2>
-
                                             {% csrf_token %}
-                                        {#    {{ form.as_p }}#}
                                         <label class="edit-parameter event-change-labels" for="id_name">Назва:</label>
                                             {{ form.name }}
                                         <label class="edit-parameter event-change-labels" for="id_short_name">Коротка назва:</label>
@@ -74,9 +82,15 @@
                                             {{ form.popularity }}
                                         </div>
 
+                                        {% if event %}
+                                            <button type="submit"> Змінити </button>
+                                            <a class="additional-buttom" href="{% url 'events:event' event.id %}"> Повернутися </a>
+                                        {% else %}
+                                            <button type="submit"> Додати </button>
+                                            <a class="additional-buttom" href="{% url 'events:all_events' %}"> Повернутися </a>
+                                        {% endif %}
 
-                                        <button type="submit"> Змінити </button>
-                                        <a class="additional-buttom" href="{% url 'events:event' event.id %}"> Повернутися </a>
+
                                     </form>
                                 </div>
                             </div>

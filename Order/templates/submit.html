@@ -38,20 +38,17 @@
                             {{ form.phone }}
                             {{ form.card_number }}
                         <div class="card-info">
-                            {{ form.card_date }}
+                            {{ form.card_month }}
+                            {{ form.card_year }}
                             {{ form.card_cvv }}
                         </div>
 
                         <button id="form-button" type="submit" >Перевірити</button>
                         <button id="make-payment" class="hidden">Оплатити</button>
                         <a id="form-button" class="additional-buttom " href="{% url 'order:cart' %}"> Вернутися у кошик </a>
-{#                        <button id="make-payment" >Оплатити</button>#}
-
                     </form>
-
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -62,14 +59,17 @@
 		form_fields[2].placeholder='Пошта';
 		form_fields[3].placeholder="Телефон (не обов'язково)";
 		form_fields[4].placeholder='Номер картки';
-		form_fields[6].placeholder='Код';
+		form_fields[5].placeholder='Місяць';
+		form_fields[6].placeholder='Рік';
+        form_fields[7].placeholder='CVV';
 
 		for (var field in form_fields){
 			form_fields[field].className += 'input submit-input'
 		}
 
-        form_fields[5].className += 'input submit-input part-input-date'
+        form_fields[5].className += 'input submit-input part-input-code'
         form_fields[6].className += 'input submit-input part-input-code'
+        form_fields[7].className += 'input submit-input part-input-code'
 
         if(user !== 'AnonymousUser') {
             form_fields[1].className += 'input submit-input disabled-field'

@@ -1,6 +1,7 @@
 from django.test import TestCase
 from News.models import News
 
+
 class NewsModelTest(TestCase):
     def setUp(self):
         self.news = News.objects.create(

@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from Events.models import Event
 from Order.models import Order, OrderItem
+from Administrator.decorators import admin_not_allowed
 from .forms import OrderForm
 from User.models import Customer
 from .utils import cookieCard
@@ -9,6 +10,7 @@ import json
 import datetime
 
 
+@admin_not_allowed
 def cart(request):
     if request.user.is_authenticated:
         customer = request.user.customer
@@ -16,12 +18,12 @@ def cart(request):
         items = order.orderitem_set.all()
     else:
         cookieData = cookieCard(request)
-        # print(cookieData)
         order = cookieData['order']
         items = cookieData['items']
     return render(request, "cart.html", {'items': items, 'order': order})
 
 
+@admin_not_allowed
 def submit(request):
     form_validated = False
     customer = None
@@ -42,6 +44,7 @@ def submit(request):
     return render(request, "submit.html", {'order': order, 'form': form, 'form_validated': form_validated})
 
 
+@admin_not_allowed
 def updateItem(request):
     data = json.loads(request.body)
     eventId = data['eventId']
@@ -73,8 +76,8 @@ def updateItem(request):
     return JsonResponse('Cart was changed', safe=False)
 
 
+@admin_not_allowed
 def procesOrder(request):
-    # print(request.body)
     transaction_id = datetime.datetime.now().timestamp()
     data = json.loads(request.body)
 
@@ -83,7 +86,6 @@ def procesOrder(request):
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
 
     else:
-        # print("COOKIES", request.COOKIES)
         name = data['form']['name']
         email = data['form']['email']
         phone = data['form']['phone']

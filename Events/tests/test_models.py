@@ -1,8 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
 from Events.models import Hall, Event
-from django.core.files.uploadedfile import SimpleUploadedFile
-from django.conf import settings
 
 
 class HallModelTest(TestCase):

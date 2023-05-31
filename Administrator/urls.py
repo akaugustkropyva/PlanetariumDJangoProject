@@ -7,7 +7,7 @@ urlpatterns = [
     path('ban-user/<int:user_id>/', ban_user, name='ban_user'),
     path('unban-user/<int:user_id>/', unban_user, name='unban_user'),
     path('notallowed/', notallowed, name='notallowed'),
-    path('/event-create/', event_create, name='event_create'),
+    path('event-create/', event_create, name='event_create'),
     path('<int:parameter>/event-change/', event_change, name='event_change'),
     path('<int:parameter>/delete/', event_delete, name='even_delete'),
 ]

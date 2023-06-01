@@ -6,7 +6,7 @@
 * [General Info](#general-information)
 * [Technologies Used](#technologies-used)
 * [Features](#features)
-* [Screenshot](#screenshot)
+* [Screenshots](#screenshots)
 * [Setup](#setup)
 * [Usage](#usage)
 * [Project Status](#project-status)
@@ -30,17 +30,17 @@
 ## Features
 - Project has small information about Planetarium, sales, halls, news of space world ans manty more.
 - You can review events, sort or filter them, pick date to buy tickets, add them to cart, edit them in cart, submit payment as an unregistered user.
-- You can create account, edit it, add events to favourites, review history of your shopping cart as a registered customer.
-- An admin can ban and unban users, edit information about events, add or even delete them.
+- You can create account, edit it, add events to favourites, review history of your
+- An admin can ban and unban users, edit information about events.
 - A pleasant design of site also makes your experience more significant.
 
 
-## Screenshot
-![Example screenshot](./media/images/screenshot.png)
+## Screenshots
+![Example screenshot](./img/screenshot.png)
 
 
 ## Setup
-All requirements are written in the requirements.txt
+What are the project requirements/dependencies? Where are they listed? A requirements.txt or a Pipfile.lock file perhaps? Where is it located?
 
 Proceed to describe how to install / setup one's local environment / get started with the project.
 

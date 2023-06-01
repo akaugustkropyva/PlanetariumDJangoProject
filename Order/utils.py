@@ -5,7 +5,6 @@ import json
 def cookieCard(request):
     try:
         cart = json.loads(request.COOKIES['cart'])
-        print(cart)
     except:
         cart = {}
 
@@ -13,11 +12,9 @@ def cookieCard(request):
     order = {'get_cart_total': 0, 'get_cart_items': 0}
 
     for i in cart:
-        print(i)
         try:
             event = Event.objects.get(id=i)
             for date in cart[i]:
-                print(date)
                 total = (event.price * cart[i][date]['quantity'])
 
                 order['get_cart_total'] += total
@@ -37,5 +34,4 @@ def cookieCard(request):
                 items.append(item)
         except:
             pass
-    print(items)
     return {'items': items, 'order': order}

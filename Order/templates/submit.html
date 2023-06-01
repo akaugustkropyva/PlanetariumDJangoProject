@@ -87,13 +87,12 @@
     {% endif %}
 
     <script type="text/javascript">
-
         let form = document.getElementById('form');
         let total = '{{ order.get_cart_total|floatformat:2 }}';
 
         document.getElementById('make-payment').addEventListener('click', function(e){
             submitFormData()
-        })
+        });
 
         function submitFormData(){
             let customerInfo = {
@@ -101,50 +100,53 @@
                 "email": null,
                 "phone": null,
             };
-            console.log('Payment button clicked')
-
+            console.log('Payment button clicked');
 
             if(user === 'AnonymousUser') {
-
-                customerInfo.name = form.name.value
-                customerInfo.email = form.email.value
-                customerInfo.phone = form.phone.value
-
+                customerInfo.name = form.name.value;
+                customerInfo.email = form.email.value;
+                customerInfo.phone = form.phone.value;
             }
 
             let customerCard = {
                 "total": total,
                 "card_number": null,
-                "card_date": null,
+                "card_month": null,
+                "card_year": null,
                 "card_cvv": null,
             };
 
-            console.log(form.card_number.value)
-            customerCard.card_number = form.card_number.value
-            customerCard.card_date = form.card_date.value
-            customerCard.card_cvv = form.card_cvv.value
+            customerCard.card_number = form.card_number.value;
+            customerCard.card_month = form.card_month.value;
+            customerCard.card_year = form.card_year.value;
+            customerCard.card_cvv = form.card_cvv.value;
 
             let url = '/proces_order/';
 
             fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/json',
-                'X-CSRFToken': csrftoken
-            },
-            body:JSON.stringify({'card': customerCard, 'form': customerInfo})
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({'card': customerCard, 'form': customerInfo})
             })
             .then((response) => response.json())
-            .then((data => {
+            .then((data) => {
                 console.log("Success:", data);
                 alert("Transaction completed");
 
-                cart = {}
-                document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
-                window.location.href='{% url 'main:landing' %}'
-            }))
-
+                cart = {};
+                document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/";
+                window.location.href = '{% url 'main:landing' %}';
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                alert("An error occurred during the transaction");
+                console.log(error.stack);
+            });
         }
     </script>
+
 {% endblock %}
 

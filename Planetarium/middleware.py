@@ -8,3 +8,4 @@ class DisableCacheMiddleware:
         response = self.get_response(request)
         response['Cache-Control'] = 'no-store, no-cache, max-age=0'
         return response
+

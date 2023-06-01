@@ -14,62 +14,62 @@
         </div>
     </section>
 
-<section class="posters-block posters-block-container">
-    <div class="container">
-        <h1>
-            Вибране
-        </h1>
-        <hr>
-        <div class="row">
-            {% if events %}
-                {% for event in events %}
-                    <div class="col-6 col-xl-3">
-                        <div class="poster">
-                            <a class="name" href="{% url 'events:event' event.id %}">{{ event.name }}</a>
-                            <img src="{{ event.image.url }}" alt="">
-                            <div class="calendar">
-                                <img src="/media/images/poster/calendar.png" alt="">
-                                <div class="text">
-                                    <p>Від {{ event.from_date|date:"m-d" }} </p>
-                                    <p>До {{ event.to_date|date:"m-d" }}</p>
+    <section class="posters-block posters-block-container">
+        <div class="container">
+            <h1>
+                Вибране
+            </h1>
+            <hr>
+            <div class="row">
+                {% if events %}
+                    {% for event in events %}
+                        <div class="col-6 col-xl-3">
+                            <div class="poster">
+                                <a class="name" href="{% url 'events:event' event.id %}">{{ event.name }}</a>
+                                <img src="{{ event.image.url }}" alt="">
+                                <div class="calendar">
+                                    <img src="/media/images/poster/calendar.png" alt="">
+                                    <div class="text">
+                                        <p>Від {{ event.from_date|date:"m-d" }} </p>
+                                        <p>До {{ event.to_date|date:"m-d" }}</p>
+                                    </div>
                                 </div>
+                                <hr class="poster-hr">
+                                <p class="price">{{ event.price }} ГРН.</p>
+                                <a href="{% url 'events:event' event.id %}">Переглянути</a>
                             </div>
-                            <hr class="poster-hr">
-                            <p class="price">{{ event.price }} ГРН.</p>
-                            <a href="{% url 'events:event' event.id %}">Переглянути</a>
                         </div>
+                    {% endfor %}
+                    <div class="form">
                     </div>
-                {% endfor %}
-                <div class="form">
-                </div>
-            {% else %}
-                <h1>
-                    Вибране порожнє...
-                </h1>
-            {% endif %}
-        </div>
-    <div class="pagination-form">
-                  <ul class="pagination">
-                        {% if events.has_previous %}
-                            <li class="page-item">
-                                <a href="?page=1">&laquo;</a>
-                                <a href="?page={{ events.previous_page_number }}" rel="prev" aria-label="&laquo; Previous">&lsaquo;</a>
-                            </li>
-                        {% endif %}
-                        <div class="current">
-                            <p class="current-page">{{ events.number }}</p>
-                            <p>/</p>
-                            <p>{{ events.paginator.num_pages }}</p>
-                        </div>
-                        {% if events.has_next %}
-                            <li class="page-item">
-                                <a href="?page={{ events.next_page_number }}" rel="next" aria-label="Next &raquo;">&rsaquo;</a>
-                                <a href="?page={{ events.paginator.num_pages }}">&raquo;</a>
-                            </li>
-                        {% endif %}
-                  </ul>
+                {% else %}
+                    <h1>
+                        Вибране порожнє...
+                    </h1>
+                {% endif %}
             </div>
-    </div>
-</section>
+        <div class="pagination-form">
+                      <ul class="pagination">
+                            {% if events.has_previous %}
+                                <li class="page-item">
+                                    <a href="?page=1">&laquo;</a>
+                                    <a href="?page={{ events.previous_page_number }}" rel="prev" aria-label="&laquo; Previous">&lsaquo;</a>
+                                </li>
+                            {% endif %}
+                            <div class="current">
+                                <p class="current-page">{{ events.number }}</p>
+                                <p>/</p>
+                                <p>{{ events.paginator.num_pages }}</p>
+                            </div>
+                            {% if events.has_next %}
+                                <li class="page-item">
+                                    <a href="?page={{ events.next_page_number }}" rel="next" aria-label="Next &raquo;">&rsaquo;</a>
+                                    <a href="?page={{ events.paginator.num_pages }}">&raquo;</a>
+                                </li>
+                            {% endif %}
+                      </ul>
+                </div>
+        </div>
+    </section>
 
 {% endblock %}

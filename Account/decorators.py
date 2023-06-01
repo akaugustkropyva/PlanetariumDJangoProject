@@ -7,5 +7,4 @@ def unauthenticated_user(view_func):
             return redirect('main:landing')
         else:
             return view_func(request, *args, **kwargs)
-
     return wrapper_func

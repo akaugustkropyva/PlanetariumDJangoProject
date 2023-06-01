@@ -1,6 +1,6 @@
 # PlanetariumDJangoProject
 > This is an e-commerce Django project of Planetarium.
-> Live demo [_here_](https://www.example.com).
+> Live demo [_here_](https://planetaruim.pythonanywhere.com/).
 
 ## Table of Contents
 * [General Info](#general-information)
@@ -41,8 +41,6 @@
 
 ## Setup
 All requirements are written in the requirements.txt file.
-
-Proceed to describe how to install / setup one's local environment / get started with the project.
 
 
 ## Usage
